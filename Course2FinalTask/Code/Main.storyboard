@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gsB-f6-qQj">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile-->
+        <scene sceneID="vNL-n9-wre">
+            <objects>
+                <viewController id="RKf-76-dVq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8vs-cY-i1t">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4HY-MP-wX6"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0hR-fJ-vYu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JhL-L9-Bhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1086" y="64"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="Yrf-j1-hwn">
+            <objects>
+                <viewController id="nKs-SI-usW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XBf-e7-YTW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Q4X-gK-W95"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="Zco-5Z-TFB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vUR-OO-lzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2173" y="65"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="RYr-yW-Ywe">
+            <objects>
+                <tabBarController id="gsB-f6-qQj" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O9N-zU-4gs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="nKs-SI-usW" kind="relationship" relationship="viewControllers" id="n08-tr-zFR"/>
+                        <segue destination="RKf-76-dVq" kind="relationship" relationship="viewControllers" id="s7R-vp-IBE"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qJu-LT-Yjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="feed" width="40" height="40"/>
+        <image name="profile" width="40" height="40"/>
+    </resources>
+</document>
