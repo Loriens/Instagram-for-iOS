@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import DataProvider
 
 class FeedTableViewController: UITableViewController {
     
+    let posts = DataProviders.shared.postsDataProvider.feed()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.separatorStyle = .none
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
