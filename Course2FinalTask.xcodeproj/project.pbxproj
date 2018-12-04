@@ -12,6 +12,7 @@
 		74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B79257202B3254006BCB41 /* AppDelegate.swift */; };
 		74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B7925E202B3254006BCB41 /* Assets.xcassets */; };
 		86CF406521B6AA0D007C0FAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */; };
+		86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */; };
 		86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F911B221B5B0BF004E38D0 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		74B7925E202B3254006BCB41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74B79263202B3254006BCB41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		86F911B221B5B0BF004E38D0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 			children = (
 				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				86F911B221B5B0BF004E38D0 /* Main.storyboard */,
+				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
 				86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */,
 			);
 			path = Code;
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */,
+				86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

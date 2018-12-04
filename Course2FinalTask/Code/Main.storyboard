@@ -26,22 +26,6 @@
             </objects>
             <point key="canvasLocation" x="-1086" y="64"/>
         </scene>
-        <!--Feed-->
-        <scene sceneID="Yrf-j1-hwn">
-            <objects>
-                <viewController id="nKs-SI-usW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XBf-e7-YTW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Q4X-gK-W95"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="Zco-5Z-TFB"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vUR-OO-lzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2173" y="65"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RYr-yW-Ywe">
             <objects>
@@ -52,11 +36,39 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="nKs-SI-usW" kind="relationship" relationship="viewControllers" id="n08-tr-zFR"/>
+                        <segue destination="PJP-e1-BDY" kind="relationship" relationship="viewControllers" id="Yrc-hN-nBt"/>
                         <segue destination="RKf-76-dVq" kind="relationship" relationship="viewControllers" id="s7R-vp-IBE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJu-LT-Yjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="VBH-ch-P27">
+            <objects>
+                <tableViewController id="PJP-e1-BDY" customClass="FeedTableViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="619-4B-BZK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="V7M-Uj-Fut">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V7M-Uj-Fut" id="fvh-Tb-Ftc">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PJP-e1-BDY" id="Xdt-NG-adG"/>
+                            <outlet property="delegate" destination="PJP-e1-BDY" id="Wxk-w6-ftJ"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="Cmj-F3-AG9"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
