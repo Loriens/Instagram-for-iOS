@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
+        print(UIScreen.main.bounds)
+        
         if let window = window {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainVC = storyboard.instantiateInitialViewController()
