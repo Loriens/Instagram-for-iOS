@@ -39,22 +39,21 @@
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2A-GB-hPC">
+                        <rect key="frame" x="16" y="376" width="52" height="29"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                        <state key="normal" title="Likes: 3">
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayV-PX-j1n">
                         <rect key="frame" x="58" y="26" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="jDS-O7-Pej">
-                        <rect key="frame" x="275" y="379" width="22" height="22"/>
-                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="M44-TH-Mjc"/>
-                            <constraint firstAttribute="width" constant="22" id="gEl-uz-Nu1"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZX0-AM-afm">
-                        <rect key="frame" x="16" y="412" width="288" height="33.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZX0-AM-afm">
+                        <rect key="frame" x="15" y="413" width="288" height="33.5"/>
                         <attributedString key="attributedText">
                             <fragment content="sdfsdf sdfsdf  sdfds f fdsf sdf dsf dsffs sf  f \fdsafsadfasdn">
                                 <attributes>
@@ -65,31 +64,33 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2A-GB-hPC">
-                        <rect key="frame" x="16" y="376" width="52" height="29"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                        <state key="normal" title="Likes: 3">
-                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                        </state>
+                    <button contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoW-I7-zMk">
+                        <rect key="frame" x="260" y="368" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="AQD-db-hXb"/>
+                            <constraint firstAttribute="width" secondItem="PoW-I7-zMk" secondAttribute="height" multiplier="1:1" id="HED-Kx-s7U"/>
+                        </constraints>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="like"/>
                     </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="ZX0-AM-afm" secondAttribute="bottom" constant="15" id="0Ue-tD-DvA"/>
-                    <constraint firstItem="jDS-O7-Pej" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-15" id="2sZ-1A-LST"/>
                     <constraint firstItem="Ayy-lH-MMP" firstAttribute="leading" secondItem="KNh-kQ-bnD" secondAttribute="trailing" constant="8" id="4VW-Z8-QJq"/>
-                    <constraint firstItem="c2A-GB-hPC" firstAttribute="top" secondItem="gNI-Op-XX7" secondAttribute="bottom" constant="6" id="6AP-eh-Xm0"/>
+                    <constraint firstItem="c2A-GB-hPC" firstAttribute="top" secondItem="gNI-Op-XX7" secondAttribute="bottom" constant="8" id="6AP-eh-Xm0"/>
                     <constraint firstItem="ayV-PX-j1n" firstAttribute="leading" secondItem="KNh-kQ-bnD" secondAttribute="trailing" constant="8" id="FNz-7E-FLB"/>
-                    <constraint firstItem="jDS-O7-Pej" firstAttribute="top" secondItem="gNI-Op-XX7" secondAttribute="bottom" constant="9" id="HWb-hg-XAE"/>
+                    <constraint firstItem="PoW-I7-zMk" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="H7O-iL-oqG"/>
                     <constraint firstItem="gNI-Op-XX7" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="NoF-MO-qOM"/>
                     <constraint firstItem="ZX0-AM-afm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="O2L-zg-Kvd"/>
                     <constraint firstItem="ZX0-AM-afm" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="PsX-Z0-cDv"/>
+                    <constraint firstItem="ZX0-AM-afm" firstAttribute="top" secondItem="PoW-I7-zMk" secondAttribute="bottom" id="abZ-f0-w4f"/>
                     <constraint firstItem="KNh-kQ-bnD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="b69-Tn-F12"/>
                     <constraint firstItem="gNI-Op-XX7" firstAttribute="top" secondItem="ayV-PX-j1n" secondAttribute="bottom" constant="8" id="cvu-CF-l1D"/>
                     <constraint firstItem="KNh-kQ-bnD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="gsc-0D-ZZ7"/>
                     <constraint firstItem="gNI-Op-XX7" firstAttribute="top" secondItem="KNh-kQ-bnD" secondAttribute="bottom" constant="8" id="iHA-oE-AMo"/>
                     <constraint firstItem="Ayy-lH-MMP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="lOE-yN-A4h"/>
                     <constraint firstItem="c2A-GB-hPC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="q5n-mq-vIk"/>
-                    <constraint firstItem="ZX0-AM-afm" firstAttribute="top" secondItem="c2A-GB-hPC" secondAttribute="bottom" constant="4" id="sC5-IW-GXA"/>
+                    <constraint firstItem="ZX0-AM-afm" firstAttribute="top" secondItem="c2A-GB-hPC" secondAttribute="bottom" constant="8" id="sC5-IW-GXA"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -97,7 +98,7 @@
                 <outlet property="author" destination="Ayy-lH-MMP" id="qpk-Qi-CbB"/>
                 <outlet property="avatarImage" destination="KNh-kQ-bnD" id="BSD-iS-fux"/>
                 <outlet property="descriptionOfPost" destination="ZX0-AM-afm" id="kjo-zx-5wD"/>
-                <outlet property="likeButton" destination="jDS-O7-Pej" id="km3-Fm-TGS"/>
+                <outlet property="likeButton" destination="PoW-I7-zMk" id="ycf-ma-jpy"/>
                 <outlet property="likes" destination="c2A-GB-hPC" id="daY-78-Ulc"/>
                 <outlet property="photo" destination="gNI-Op-XX7" id="c0w-am-gw8"/>
                 <outlet property="timeLabel" destination="ayV-PX-j1n" id="Wtk-33-QPe"/>

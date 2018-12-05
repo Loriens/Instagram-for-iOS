@@ -17,7 +17,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionOfPost: UILabel!
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var likes: UIButton!
-    @IBOutlet weak var likeButton: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +31,6 @@ class FeedTableViewCell: UITableViewCell {
         avatarImage.image = post.authorAvatar
         author.setTitle(post.authorUsername, for: .normal)
         photo.image = post.image
-        likeButton.tintColor = UIColor.lightGray
         descriptionOfPost.text = post.description
         descriptionOfPost.sizeToFit()
         likes.setTitle("Likes: \(post.likedByCount)", for: .normal)
