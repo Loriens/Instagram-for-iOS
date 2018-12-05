@@ -16,10 +16,13 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Feed"
+        
+        self.tableView.estimatedRowHeight = 200.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = .none
         self.tableView.allowsSelection = false
-        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
-    }
+        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -38,9 +41,9 @@ class FeedTableViewController: UITableViewController {
         
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 8.0 + 35.0 + 44.0 + 40.0 + self.view.frame.width
-    }
+
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 8.0 + 35.0 + 44.0 + 40.0 + self.view.frame.width
+//    }
 
 }
