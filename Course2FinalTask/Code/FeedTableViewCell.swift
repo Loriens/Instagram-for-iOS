@@ -19,9 +19,6 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var likes: UIButton!
     @IBOutlet weak var likeButton: UIImageView!
     
-    var originHeightDescription: CGFloat = 0,
-        newHeightDescription: CGFloat = 0
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -36,9 +33,17 @@ class FeedTableViewCell: UITableViewCell {
         photo.image = post.image
         likeButton.tintColor = UIColor.lightGray
         descriptionOfPost.text = post.description
-        originHeightDescription = descriptionOfPost.frame.height
         descriptionOfPost.sizeToFit()
-        newHeightDescription = descriptionOfPost.frame.height
+        likes.setTitle("Likes: \(post.likedByCount)", for: .normal)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        dateFormatter.doesRelativeDateFormatting = true
+        let date = dateFormatter.string(from: post.createdTime)
+        
+        timeLabel.text = date
     }
     
 }
