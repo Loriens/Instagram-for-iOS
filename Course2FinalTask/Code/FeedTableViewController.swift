@@ -16,7 +16,7 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Feed"
+        self.title = "Feed"
         
         self.tableView.estimatedRowHeight = 200.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -38,12 +38,20 @@ class FeedTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
 
         cell.configure(with: posts[indexPath.item])
+        addActions(cell)
         
         return cell
     }
 
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 8.0 + 35.0 + 44.0 + 40.0 + self.view.frame.width
-//    }
+    func addActions(_ button: FeedTableViewCell) {
+        button.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func likesButtonPressed(_ sender: Any) {
+        let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController")
+        view.addSubview(UsersListVC.view)
+        
+        self.navigationController?.pushViewController(UsersListVC, animated: true)
+    }
 
 }
