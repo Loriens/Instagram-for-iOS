@@ -43,14 +43,16 @@ class FeedTableViewController: UITableViewController {
         return cell
     }
 
-    func addActions(_ button: FeedTableViewCell) {
-        button.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
+    func addActions(_ cell: FeedTableViewCell) {
+        cell.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
+        cell.likes.titlePage = "Likes"
     }
     
-    @objc func likesButtonPressed(_ sender: Any) {
+    @objc func likesButtonPressed(_ sender: DataUIButton) {
         let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController")
         view.addSubview(UsersListVC.view)
-        
+        UsersListVC.title = sender.titlePage
+
         self.navigationController?.pushViewController(UsersListVC, animated: true)
     }
 

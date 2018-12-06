@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import DataProvider
 
 class UsersListTableViewController: UITableViewController {
+    
+    var posts: Post?
+    var pageTitle: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let receivedText = pageTitle {
+            self.title = receivedText
+        }
 
         self.navigationController?.navigationItem.hidesBackButton = false
     }

@@ -39,7 +39,7 @@
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2A-GB-hPC">
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2A-GB-hPC" customClass="DataUIButton" customModule="Course2FinalTask" customModuleProvider="target">
                         <rect key="frame" x="16" y="376" width="52" height="29"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                         <state key="normal" title="Likes: 3">
@@ -99,7 +99,7 @@
                 <outlet property="avatarImage" destination="KNh-kQ-bnD" id="BSD-iS-fux"/>
                 <outlet property="descriptionOfPost" destination="ZX0-AM-afm" id="kjo-zx-5wD"/>
                 <outlet property="likeButton" destination="PoW-I7-zMk" id="ycf-ma-jpy"/>
-                <outlet property="likes" destination="c2A-GB-hPC" id="daY-78-Ulc"/>
+                <outlet property="likes" destination="c2A-GB-hPC" id="2Da-DA-xdZ"/>
                 <outlet property="photo" destination="gNI-Op-XX7" id="c0w-am-gw8"/>
                 <outlet property="timeLabel" destination="ayV-PX-j1n" id="Wtk-33-QPe"/>
             </connections>

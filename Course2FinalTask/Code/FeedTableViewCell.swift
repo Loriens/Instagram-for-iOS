@@ -16,8 +16,8 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionOfPost: UILabel!
     @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var likes: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likes: DataUIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
