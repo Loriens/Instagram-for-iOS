@@ -11,29 +11,45 @@ import DataProvider
 
 class UsersListTableViewController: UITableViewController {
     
-    var posts: Post?
-    var pageTitle: String?
+    var users: [User.Identifier]?
+    var userProvider = DataProviders.shared.usersDataProvider
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let receivedText = pageTitle {
-            self.title = receivedText
-        }
 
         self.navigationController?.navigationItem.hidesBackButton = false
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let count = users?.count else  {
+            return 0
+        }
+        
+        return count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "UserCell")!
+        
+        if let user = userProvider.user(with: users![indexPath.item]) {
+            cell.textLabel?.text = user.username
+            cell.imageView?.image = user.avatar
+        }
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
     }
 
 }

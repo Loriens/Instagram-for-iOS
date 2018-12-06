@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import DataProvider
 
 @objc class DataUIButton: UIButton {
     var titlePage: String?
+    var postID: Post.Identifier?
 }

@@ -38,20 +38,22 @@ class FeedTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
 
         cell.configure(with: posts[indexPath.item])
-        addActions(cell)
+        addActions(cell, posts[indexPath.item])
         
         return cell
     }
 
-    func addActions(_ cell: FeedTableViewCell) {
+    func addActions(_ cell: FeedTableViewCell, _ post: Post) {
         cell.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
         cell.likes.titlePage = "Likes"
+        cell.likes.postID = post.id
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {
-        let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController")
+        let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController") as! UsersListTableViewController
         view.addSubview(UsersListVC.view)
         UsersListVC.title = sender.titlePage
+        UsersListVC.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: sender.postID!)
 
         self.navigationController?.pushViewController(UsersListVC, animated: true)
     }
