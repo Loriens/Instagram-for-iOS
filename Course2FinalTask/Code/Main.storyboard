@@ -68,9 +68,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="k47-BB-rCn"/>
-                    <connections>
-                        <segue destination="w48-JF-KBh" kind="presentation" identifier="showLikes" id="ENr-RM-oKC"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
