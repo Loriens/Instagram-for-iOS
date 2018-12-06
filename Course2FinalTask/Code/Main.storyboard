@@ -68,6 +68,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="k47-BB-rCn"/>
+                    <connections>
+                        <segue destination="S0b-MP-coe" kind="show" identifier="showLikes" id="AyH-S1-3bR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -144,4 +147,7 @@
         <image name="feed" width="40" height="40"/>
         <image name="profile" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="AyH-S1-3bR"/>
+    </inferredMetricsTieBreakers>
 </document>

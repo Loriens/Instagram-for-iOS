@@ -50,12 +50,24 @@ class FeedTableViewController: UITableViewController {
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {
-        let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController") as! UsersListTableViewController
-        view.addSubview(UsersListVC.view)
-        UsersListVC.title = sender.titlePage
-        UsersListVC.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: sender.postID!)
-
-        self.navigationController?.pushViewController(UsersListVC, animated: true)
+//        let UsersListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsersListTableViewController") as! UsersListTableViewController
+//        view.addSubview(UsersListVC.view)
+//        UsersListVC.title = sender.titlePage
+//        UsersListVC.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: sender.postID!)
+//
+//        self.navigationController?.pushViewController(UsersListVC, animated: true)
+        performSegue(withIdentifier: "showLikes", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dataButton = sender as? DataUIButton else {
+            return
+        }
+        
+        if let destination = segue.destination as? UsersListTableViewController {
+            destination.title = dataButton.titlePage
+            destination.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!)
+        }
     }
 
 }
