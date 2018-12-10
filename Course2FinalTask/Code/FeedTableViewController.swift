@@ -47,6 +47,13 @@ class FeedTableViewController: UITableViewController {
         cell.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
         cell.likes.titlePage = "Likes"
         cell.likes.postID = post.id
+        
+        cell.author.addTarget(self, action: #selector(authorButtonPressed(_:)), for: .touchUpInside)
+        cell.author.userID = post.author
+    }
+    
+    @objc func authorButtonPressed(_ sender: DataUIButton) {
+        performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {
@@ -67,6 +74,10 @@ class FeedTableViewController: UITableViewController {
         if let destination = segue.destination as? UsersListTableViewController {
             destination.title = dataButton.titlePage
             destination.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!)
+        }
+        
+        if let destination = segue.destination as? ProfileCollectionViewController {
+            destination.currentUser = DataProviders.shared.usersDataProvider.user(with: dataButton.userID!)
         }
     }
 

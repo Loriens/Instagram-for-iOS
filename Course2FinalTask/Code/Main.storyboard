@@ -53,6 +53,7 @@
                     <navigationItem key="navigationItem" id="k47-BB-rCn"/>
                     <connections>
                         <segue destination="S0b-MP-coe" kind="show" identifier="showLikes" id="AyH-S1-3bR"/>
+                        <segue destination="2ak-vh-HQE" kind="show" identifier="showAuthorProfileFromFeed" id="8Ao-jY-jiz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,6 +193,7 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="H4r-4V-MLX"/>
+        <segue reference="8Ao-jY-jiz"/>
+        <segue reference="AyH-S1-3bR"/>
     </inferredMetricsTieBreakers>
 </document>

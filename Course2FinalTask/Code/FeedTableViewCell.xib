@@ -32,7 +32,7 @@
                             <constraint firstAttribute="width" secondItem="gNI-Op-XX7" secondAttribute="height" multiplier="1:1" id="YGl-pi-xxf"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayy-lH-MMP">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayy-lH-MMP" customClass="DataUIButton" customModule="Course2FinalTask" customModuleProvider="target">
                         <rect key="frame" x="58" y="2" width="46" height="29"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                         <state key="normal" title="Author">
@@ -95,7 +95,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="author" destination="Ayy-lH-MMP" id="qpk-Qi-CbB"/>
+                <outlet property="author" destination="Ayy-lH-MMP" id="HOk-y8-IEi"/>
                 <outlet property="avatarImage" destination="KNh-kQ-bnD" id="BSD-iS-fux"/>
                 <outlet property="descriptionOfPost" destination="ZX0-AM-afm" id="kjo-zx-5wD"/>
                 <outlet property="likeButton" destination="PoW-I7-zMk" id="ycf-ma-jpy"/>

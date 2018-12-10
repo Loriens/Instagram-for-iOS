@@ -99,13 +99,13 @@
 			children = (
 				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				86F911B221B5B0BF004E38D0 /* Main.storyboard */,
-				8687E59221B8243E00A403AB /* UsersListTableViewController.swift */,
+				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
-				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
+				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
 				86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */,
 				86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */,
-				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
+				8687E59221B8243E00A403AB /* UsersListTableViewController.swift */,
 				8687E59421B938D400A403AB /* DataUIButton.swift */,
 				86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */,
 			);

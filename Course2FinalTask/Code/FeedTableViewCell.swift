@@ -11,8 +11,8 @@ import DataProvider
 
 class FeedTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var author: DataUIButton!
     @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet weak var author: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionOfPost: UILabel!
     @IBOutlet weak var photo: UIImageView!
