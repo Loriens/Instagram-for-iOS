@@ -58,6 +58,9 @@ class FeedTableViewController: UITableViewController {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTappedBigLike(_:)))
         doubleTap.numberOfTapsRequired = 2
         cell.addGestureRecognizer(doubleTap)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedAvatar(_:)))
+        cell.addGestureRecognizer(tap)
     }
     
     @objc func authorButtonPressed(_ sender: DataUIButton) {
@@ -73,7 +76,6 @@ class FeedTableViewController: UITableViewController {
             DataProviders.shared.postsDataProvider.unlikePost(with: sender.postID!)
         }
     }
-    
     
     @objc func doubleTappedBigLike(_ sender: UITapGestureRecognizer) {
         guard let view = sender.view as? FeedTableViewCell else {
@@ -97,6 +99,18 @@ class FeedTableViewController: UITableViewController {
             if view.likeButton.tintColor == UIColor.lightGray {
                 likeButtonPressed(view.likeButton)
             }
+        }
+    }
+    
+    @objc func tappedAvatar(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view as? FeedTableViewCell else {
+            return
+        }
+        
+        let point = sender.location(in: view)
+        
+        if view.avatarImage.frame.contains(point) {
+            performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: view.author)
         }
     }
     

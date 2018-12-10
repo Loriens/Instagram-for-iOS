@@ -28,6 +28,7 @@ class FeedTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
+    // Собирает ячейку FeedTableViewCell в соответствия с данными из публикации
     func configure(with post: Post) {
         avatarImage.image = post.authorAvatar
         author.setTitle(post.authorUsername, for: .normal)
