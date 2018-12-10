@@ -19,6 +19,8 @@
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
 		86CF406B21B6BC68007C0FAE /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */; };
 		86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F911B221B5B0BF004E38D0 /* Main.storyboard */; };
+		86FF617221BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */; };
+		86FF617321BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,8 @@
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		86F911B221B5B0BF004E38D0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
 				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
+				86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */,
+				86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */,
 				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
 				8687E59421B938D400A403AB /* DataUIButton.swift */,
 				86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */,
@@ -185,6 +191,7 @@
 				86CF406521B6AA0D007C0FAE /* LaunchScreen.storyboard in Resources */,
 				86CF406B21B6BC68007C0FAE /* FeedTableViewCell.xib in Resources */,
 				74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */,
+				86FF617321BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib in Resources */,
 				86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +206,7 @@
 				74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */,
 				8687E59521B938D400A403AB /* DataUIButton.swift in Sources */,
 				86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */,
+				86FF617221BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				8687E59321B8243E00A403AB /* UsersListTableViewController.swift in Sources */,
 				8687E59A21B95C0300A403AB /* ProfileCollectionViewController.swift in Sources */,
 				86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */,

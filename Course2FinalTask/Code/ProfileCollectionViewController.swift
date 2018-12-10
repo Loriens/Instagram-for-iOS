@@ -10,6 +10,7 @@ import UIKit
 import DataProvider
 
 private let reuseIdentifier = "CollectionCell"
+private let headerReuseIdentifier = "ProfileHeader"
 
 class ProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -20,13 +21,14 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = userProvider.currentUser().username
+        self.navigationItem.title = userProvider.currentUser().username
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UINib.init(nibName: "ProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -65,6 +67,19 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         cell.backgroundView = imageView
     
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! ProfileHeaderCollectionReusableView
+        
+        let currentUser = userProvider.currentUser()
+        headerView.avatar.image = currentUser.avatar
+        headerView.fullName.text = currentUser.fullName
+        headerView.followers.setTitle("Followers: \(currentUser.followedByCount)", for: .normal)
+        headerView.following.setTitle("Following: \(currentUser.followsCount)", for: .normal)
+        addActions(currentUser, headerView)
+        
+        return headerView
     }
 
     // MARK: UICollectionViewDelegate
@@ -111,5 +126,58 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.collectionView!.frame.width, height: 86.0)
+    }
 
+}
+
+
+// Add actions for buttons
+
+extension ProfileCollectionViewController {
+    
+    func addActions(_ user: User, _ headerView: ProfileHeaderCollectionReusableView) {
+        headerView.followers.addTarget(self, action: #selector(followersButtonPressed(_:)), for: .touchUpInside)
+        headerView.following.addTarget(self, action: #selector(followingButtonPressed(_:)), for: .touchUpInside)
+        
+        headerView.followers.titlePage = "Followers"
+        headerView.following.titlePage = "Following"
+        
+        headerView.followers.userID = user.id
+        headerView.following.userID = user.id
+    }
+    
+    @objc func followersButtonPressed(_ sender: DataUIButton) {
+        performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+    }
+    
+    @objc func followingButtonPressed(_ sender: DataUIButton) {
+        performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dataButton = sender as? DataUIButton else {
+            return
+        }
+        
+        if let destination = segue.destination as? UsersListTableViewController {
+            var users = [User]()
+            
+            destination.title = dataButton.titlePage
+            
+            if dataButton.titlePage!.contains("Following") {
+                users = userProvider.usersFollowedByUser(with: dataButton.userID!)!
+            } else {
+                users = userProvider.usersFollowingUser(with: dataButton.userID!)!
+            }
+            
+            destination.users = [User.Identifier]()
+            
+            for user in users {
+                destination.users?.append(user.id)
+            }
+        }
+    }
 }

@@ -12,4 +12,5 @@ import DataProvider
 @objc class DataUIButton: UIButton {
     var titlePage: String?
     var postID: Post.Identifier?
+    var userID: User.Identifier?
 }
