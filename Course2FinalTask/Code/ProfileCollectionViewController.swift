@@ -11,10 +11,11 @@ import DataProvider
 
 private let reuseIdentifier = "CollectionCell"
 
-class ProfileCollectionViewController: UICollectionViewController {
+class ProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let dataProvider = DataProviders.shared.postsDataProvider
     let userProvider = DataProviders.shared.usersDataProvider
+//    var cellCollor = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +57,12 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
+        
+//        cell.backgroundColor = cellCollor ? UIColor.red : UIColor.blue
+//        cellCollor = !cellCollor
+        let imageView = UIImageView(frame: cell.frame)
+        imageView.image = dataProvider.findPosts(by: userProvider.currentUser().id)![indexPath.item].image
+        cell.backgroundView = imageView
     
         return cell
     }
@@ -92,5 +97,19 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     }
     */
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.collectionView!.frame.width / 3, height: self.collectionView!.frame.width / 3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
 
 }
