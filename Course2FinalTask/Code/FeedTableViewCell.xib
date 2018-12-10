@@ -73,6 +73,12 @@
                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" image="like"/>
                     </button>
+                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="bigLike" translatesAutoresizingMaskIntoConstraints="NO" id="oY6-bw-0WL">
+                        <rect key="frame" x="110" y="161" width="99" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="oY6-bw-0WL" secondAttribute="height" multiplier="100:100" id="EJ7-nR-eAi"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="ZX0-AM-afm" secondAttribute="bottom" constant="15" id="0Ue-tD-DvA"/>
@@ -80,6 +86,7 @@
                     <constraint firstItem="c2A-GB-hPC" firstAttribute="top" secondItem="gNI-Op-XX7" secondAttribute="bottom" constant="8" id="6AP-eh-Xm0"/>
                     <constraint firstItem="ayV-PX-j1n" firstAttribute="leading" secondItem="KNh-kQ-bnD" secondAttribute="trailing" constant="8" id="FNz-7E-FLB"/>
                     <constraint firstItem="PoW-I7-zMk" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="H7O-iL-oqG"/>
+                    <constraint firstItem="oY6-bw-0WL" firstAttribute="centerY" secondItem="gNI-Op-XX7" secondAttribute="centerY" id="LpZ-cf-MeF"/>
                     <constraint firstItem="gNI-Op-XX7" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="NoF-MO-qOM"/>
                     <constraint firstItem="ZX0-AM-afm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="O2L-zg-Kvd"/>
                     <constraint firstItem="ZX0-AM-afm" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="PsX-Z0-cDv"/>
@@ -89,6 +96,7 @@
                     <constraint firstItem="KNh-kQ-bnD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="gsc-0D-ZZ7"/>
                     <constraint firstItem="gNI-Op-XX7" firstAttribute="top" secondItem="KNh-kQ-bnD" secondAttribute="bottom" constant="8" id="iHA-oE-AMo"/>
                     <constraint firstItem="Ayy-lH-MMP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="lOE-yN-A4h"/>
+                    <constraint firstItem="oY6-bw-0WL" firstAttribute="centerX" secondItem="gNI-Op-XX7" secondAttribute="centerX" id="pfK-IH-Wuj"/>
                     <constraint firstItem="c2A-GB-hPC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="q5n-mq-vIk"/>
                     <constraint firstItem="ZX0-AM-afm" firstAttribute="top" secondItem="c2A-GB-hPC" secondAttribute="bottom" constant="8" id="sC5-IW-GXA"/>
                 </constraints>
@@ -97,6 +105,7 @@
             <connections>
                 <outlet property="author" destination="Ayy-lH-MMP" id="HOk-y8-IEi"/>
                 <outlet property="avatarImage" destination="KNh-kQ-bnD" id="BSD-iS-fux"/>
+                <outlet property="bigLikeImage" destination="oY6-bw-0WL" id="mUl-al-R3H"/>
                 <outlet property="descriptionOfPost" destination="ZX0-AM-afm" id="kjo-zx-5wD"/>
                 <outlet property="likeButton" destination="PoW-I7-zMk" id="HpV-Dk-oqh"/>
                 <outlet property="likes" destination="c2A-GB-hPC" id="2Da-DA-xdZ"/>
@@ -107,6 +116,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bigLike" width="100" height="100"/>
         <image name="like" width="25" height="25"/>
     </resources>
 </document>

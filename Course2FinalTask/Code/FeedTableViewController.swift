@@ -43,6 +43,7 @@ class FeedTableViewController: UITableViewController {
         return cell
     }
 
+    // Добавляет переходы по кнопкам и действия по жестам
     func addActions(_ cell: FeedTableViewCell, _ post: Post) {
         cell.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
         cell.likes.titlePage = "Likes"
@@ -53,6 +54,10 @@ class FeedTableViewController: UITableViewController {
         
         cell.likeButton.addTarget(self, action: #selector(likeButtonPressed(_:)), for: .touchUpInside)
         cell.likeButton.postID = post.id
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTappedBigLike(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(doubleTap)
     }
     
     @objc func authorButtonPressed(_ sender: DataUIButton) {
@@ -66,6 +71,32 @@ class FeedTableViewController: UITableViewController {
         } else {
             sender.tintColor = UIColor.lightGray
             DataProviders.shared.postsDataProvider.unlikePost(with: sender.postID!)
+        }
+    }
+    
+    
+    @objc func doubleTappedBigLike(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view as? FeedTableViewCell else {
+            return
+        }
+        
+        let point = sender.location(in: view)
+
+        if view.photo.frame.contains(point) {
+            let animation = CAKeyframeAnimation(keyPath: "opacity")
+            animation.values = [0, 1, 1, 0, 0]
+            animation.keyTimes = [0, 0.1, 0.3, 0.6, 1]
+            animation.duration = 1.0
+            let linear = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            let easeOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            animation.timingFunctions = [linear, linear, easeOut, linear]
+            
+            view.bigLikeImage.layer.add(animation, forKey: "opacity")
+            
+            // Если лайк уже стоит, то лайк не убирается (так сделано в Инстаграме, если я не ошибаюсь, поэтому так же сделал)
+            if view.likeButton.tintColor == UIColor.lightGray {
+                likeButtonPressed(view.likeButton)
+            }
         }
     }
     

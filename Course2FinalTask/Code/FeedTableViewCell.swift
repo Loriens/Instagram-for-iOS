@@ -18,6 +18,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionOfPost: UILabel!
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var likes: DataUIButton!
+    @IBOutlet weak var bigLikeImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,6 +52,9 @@ class FeedTableViewCell: UITableViewCell {
         } else {
             likeButton.tintColor = UIColor.lightGray
         }
+        
+        // Не нашёл размеров сердца bigLike, на глаз прикинул его размер
+        likeButton.frame.size.width = self.frame.width / 4
     }
     
 }
