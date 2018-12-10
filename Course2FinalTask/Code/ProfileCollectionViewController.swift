@@ -16,12 +16,16 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     let dataProvider = DataProviders.shared.postsDataProvider
     let userProvider = DataProviders.shared.usersDataProvider
-//    var cellCollor = true
+    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = userProvider.currentUser().username
+        if let user = currentUser {
+            self.navigationItem.title = user.username
+        } else {
+            self.navigationItem.title = userProvider.currentUser().username
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,8 +57,11 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return dataProvider.findPosts(by: userProvider.currentUser().id)!.count
-//        return 0
+        if let user = currentUser {
+            return dataProvider.findPosts(by: user.id)!.count
+        } else {
+            return dataProvider.findPosts(by: userProvider.currentUser().id)!.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,7 +70,11 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 //        cell.backgroundColor = cellCollor ? UIColor.red : UIColor.blue
 //        cellCollor = !cellCollor
         let imageView = UIImageView(frame: cell.frame)
-        imageView.image = dataProvider.findPosts(by: userProvider.currentUser().id)![indexPath.item].image
+        if let user = currentUser {
+            imageView.image = dataProvider.findPosts(by: user.id)![indexPath.item].image
+        } else {
+            imageView.image = dataProvider.findPosts(by: userProvider.currentUser().id)![indexPath.item].image
+        }
         cell.backgroundView = imageView
     
         return cell
@@ -72,12 +83,18 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! ProfileHeaderCollectionReusableView
         
-        let currentUser = userProvider.currentUser()
-        headerView.avatar.image = currentUser.avatar
-        headerView.fullName.text = currentUser.fullName
-        headerView.followers.setTitle("Followers: \(currentUser.followedByCount)", for: .normal)
-        headerView.following.setTitle("Following: \(currentUser.followsCount)", for: .normal)
-        addActions(currentUser, headerView)
+        var user: User
+        if let currUser = currentUser {
+            user = currUser
+        } else {
+            user = userProvider.currentUser()
+        }
+        
+        headerView.avatar.image = user.avatar
+        headerView.fullName.text = user.fullName
+        headerView.followers.setTitle("Followers: \(user.followedByCount)", for: .normal)
+        headerView.following.setTitle("Following: \(user.followsCount)", for: .normal)
+        addActions(user, headerView)
         
         return headerView
     }
