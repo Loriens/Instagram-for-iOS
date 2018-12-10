@@ -155,6 +155,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
 extension ProfileCollectionViewController {
     
+    // Добавляет переходы по кнопкам и действия по жестам
     func addActions(_ user: User, _ headerView: ProfileHeaderCollectionReusableView) {
         headerView.followers.addTarget(self, action: #selector(followersButtonPressed(_:)), for: .touchUpInside)
         headerView.following.addTarget(self, action: #selector(followingButtonPressed(_:)), for: .touchUpInside)
