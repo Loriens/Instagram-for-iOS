@@ -51,5 +51,25 @@ class UsersListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sender = DataUIButton()
+        guard let users = users else {
+            return
+        }
+        sender.userID = users[indexPath.item]
+        
+        performSegue(withIdentifier: "showUserProfileFromUsersList", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dataButton = sender as? DataUIButton else {
+            return
+        }
+        
+        if let destination = segue.destination as? ProfileCollectionViewController {
+            destination.currentUser = DataProviders.shared.usersDataProvider.user(with: dataButton.userID!)
+        }
+    }
 
 }

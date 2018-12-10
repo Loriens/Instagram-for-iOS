@@ -103,6 +103,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cmZ-z8-Ilh"/>
+                    <connections>
+                        <segue destination="2ak-vh-HQE" kind="show" identifier="showUserProfileFromUsersList" id="m5w-wq-0kN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oc-Yt-Q2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -193,7 +196,7 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Ao-jY-jiz"/>
+        <segue reference="m5w-wq-0kN"/>
         <segue reference="AyH-S1-3bR"/>
     </inferredMetricsTieBreakers>
 </document>
