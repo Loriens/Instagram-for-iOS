@@ -64,7 +64,7 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoW-I7-zMk">
+                    <button contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoW-I7-zMk" customClass="DataUIButton" customModule="Course2FinalTask" customModuleProvider="target">
                         <rect key="frame" x="260" y="368" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="AQD-db-hXb"/>
@@ -98,7 +98,7 @@
                 <outlet property="author" destination="Ayy-lH-MMP" id="HOk-y8-IEi"/>
                 <outlet property="avatarImage" destination="KNh-kQ-bnD" id="BSD-iS-fux"/>
                 <outlet property="descriptionOfPost" destination="ZX0-AM-afm" id="kjo-zx-5wD"/>
-                <outlet property="likeButton" destination="PoW-I7-zMk" id="ycf-ma-jpy"/>
+                <outlet property="likeButton" destination="PoW-I7-zMk" id="HpV-Dk-oqh"/>
                 <outlet property="likes" destination="c2A-GB-hPC" id="2Da-DA-xdZ"/>
                 <outlet property="photo" destination="gNI-Op-XX7" id="c0w-am-gw8"/>
                 <outlet property="timeLabel" destination="ayV-PX-j1n" id="Wtk-33-QPe"/>

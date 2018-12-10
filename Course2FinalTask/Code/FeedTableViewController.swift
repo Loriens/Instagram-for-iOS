@@ -50,10 +50,23 @@ class FeedTableViewController: UITableViewController {
         
         cell.author.addTarget(self, action: #selector(authorButtonPressed(_:)), for: .touchUpInside)
         cell.author.userID = post.author
+        
+        cell.likeButton.addTarget(self, action: #selector(likeButtonPressed(_:)), for: .touchUpInside)
+        cell.likeButton.postID = post.id
     }
     
     @objc func authorButtonPressed(_ sender: DataUIButton) {
         performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
+    }
+    
+    @objc func likeButtonPressed(_ sender: DataUIButton) {
+        if sender.tintColor == UIColor.lightGray {
+            sender.tintColor = UIColor.black
+            DataProviders.shared.postsDataProvider.likePost(with: sender.postID!)
+        } else {
+            sender.tintColor = UIColor.lightGray
+            DataProviders.shared.postsDataProvider.unlikePost(with: sender.postID!)
+        }
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {

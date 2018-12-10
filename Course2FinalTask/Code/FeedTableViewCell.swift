@@ -11,12 +11,12 @@ import DataProvider
 
 class FeedTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var likeButton: DataUIButton!
     @IBOutlet weak var author: DataUIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionOfPost: UILabel!
     @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likes: DataUIButton!
     
     override func awakeFromNib() {
@@ -43,6 +43,14 @@ class FeedTableViewCell: UITableViewCell {
         let date = dateFormatter.string(from: post.createdTime)
         
         timeLabel.text = date
+        
+        let usersLikedPost = DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id)!
+        
+        if usersLikedPost.contains(DataProviders.shared.usersDataProvider.currentUser().id) {
+            likeButton.tintColor = UIColor.black
+        } else {
+            likeButton.tintColor = UIColor.lightGray
+        }
     }
     
 }
