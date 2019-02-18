@@ -69,7 +69,7 @@ class FeedTableViewController: UITableViewController {
     
     @objc func likeButtonPressed(_ sender: DataUIButton) {
         if sender.tintColor == UIColor.lightGray {
-            sender.tintColor = UIColor.black
+            sender.tintColor = UIView().tintColor
             DataProviders.shared.postsDataProvider.likePost(with: sender.postID!)
         } else {
             sender.tintColor = UIColor.lightGray

@@ -49,7 +49,7 @@ class FeedTableViewCell: UITableViewCell {
         let usersLikedPost = DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id)!
         
         if usersLikedPost.contains(DataProviders.shared.usersDataProvider.currentUser().id) {
-            likeButton.tintColor = UIColor.black
+            likeButton.tintColor = UIView().tintColor
         } else {
             likeButton.tintColor = UIColor.lightGray
         }
