@@ -38,13 +38,13 @@ class FeedTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
 
         cell.configure(with: posts[indexPath.item])
-        addActions(cell, posts[indexPath.item])
+        addActions(cell, posts[indexPath.item], indexPath)
         
         return cell
     }
 
     // Добавляет переходы по кнопкам и действия по жестам
-    func addActions(_ cell: FeedTableViewCell, _ post: Post) {
+    func addActions(_ cell: FeedTableViewCell, _ post: Post, _ index: IndexPath) {
         cell.likes.addTarget(self, action: #selector(likesButtonPressed(_:)), for: .touchUpInside)
         cell.likes.titlePage = "Likes"
         cell.likes.postID = post.id
@@ -54,6 +54,7 @@ class FeedTableViewController: UITableViewController {
         
         cell.likeButton.addTarget(self, action: #selector(likeButtonPressed(_:)), for: .touchUpInside)
         cell.likeButton.postID = post.id
+        cell.likeButton.likes = cell.likes
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTappedBigLike(_:)))
         doubleTap.numberOfTapsRequired = 2
@@ -70,10 +71,31 @@ class FeedTableViewController: UITableViewController {
     @objc func likeButtonPressed(_ sender: DataUIButton) {
         if sender.tintColor == UIColor.lightGray {
             sender.tintColor = UIView().tintColor
-            DataProviders.shared.postsDataProvider.likePost(with: sender.postID!)
+            
+            guard let likes = sender.likes, let post = sender.postID, let arrayOfLikesTitle = likes.title(for: .normal)?.components(separatedBy: CharacterSet.decimalDigits.inverted) else {
+                return
+            }
+            
+            let countOfLikes = Int(arrayOfLikesTitle.last!)! + 1
+            UIView.performWithoutAnimation {
+                likes.setTitle("Likes: \(countOfLikes)", for: .normal)
+                likes.layoutIfNeeded()
+            }
+            DataProviders.shared.postsDataProvider.likePost(with: post)
         } else {
             sender.tintColor = UIColor.lightGray
-            DataProviders.shared.postsDataProvider.unlikePost(with: sender.postID!)
+            
+            
+            guard let likes = sender.likes, let post = sender.postID, let arrayOfLikesTitle = likes.title(for: .normal)?.components(separatedBy: CharacterSet.decimalDigits.inverted) else {
+                return
+            }
+            
+            let countOfLikes = Int(arrayOfLikesTitle.last!)! - 1
+            UIView.performWithoutAnimation {
+                likes.setTitle("Likes: \(countOfLikes)", for: .normal)
+                likes.layoutIfNeeded()
+            }
+            DataProviders.shared.postsDataProvider.unlikePost(with: post)
         }
     }
     

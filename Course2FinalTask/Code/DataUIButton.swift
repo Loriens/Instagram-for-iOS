@@ -12,6 +12,7 @@ import DataProvider
 // Добавление полей с данными в UIButton
 @objc class DataUIButton: UIButton {
     var titlePage: String?
+    var likes: UIButton?
     var postID: Post.Identifier?
     var userID: User.Identifier?
 }
