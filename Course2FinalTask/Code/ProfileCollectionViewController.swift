@@ -24,7 +24,19 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         if let user = currentUser {
             self.navigationItem.title = user.username
         } else {
-            self.navigationItem.title = userProvider.currentUser().username
+            let currentUserGroup = DispatchGroup()
+            
+            currentUserGroup.enter()
+            
+            userProvider.currentUser(queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                user in
+                
+                self.currentUser = user
+                
+                currentUserGroup.leave()
+            })
+            
+            currentUserGroup.wait()
         }
         
         // Uncomment the following line to preserve selection between presentations
@@ -57,45 +69,67 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        var count = 0
+        
         if let user = currentUser {
-            return dataProvider.findPosts(by: user.id)!.count
-        } else {
-            return dataProvider.findPosts(by: userProvider.currentUser().id)!.count
+            let findPostsGroup = DispatchGroup()
+            
+            findPostsGroup.enter()
+            
+            dataProvider.findPosts(by: user.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                posts in
+                count = posts!.count
+                findPostsGroup.leave()
+            })
+            
+            findPostsGroup.wait()
         }
+        
+        return count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        
-//        cell.backgroundColor = cellCollor ? UIColor.red : UIColor.blue
-//        cellCollor = !cellCollor
-        let imageView = UIImageView(frame: cell.frame)
         if let user = currentUser {
-            imageView.image = dataProvider.findPosts(by: user.id)![indexPath.item].image
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+            
+            let imageView = UIImageView(frame: cell.frame)
+            let findPostsGroup = DispatchGroup()
+            
+            findPostsGroup.enter()
+            
+            dataProvider.findPosts(by: user.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                posts in
+                DispatchQueue.main.async {
+                    imageView.image = posts![indexPath.item].image
+                    cell.backgroundView = imageView
+                }
+                findPostsGroup.leave()
+            })
+            
+            findPostsGroup.wait()
+            
+            return cell
         } else {
-            imageView.image = dataProvider.findPosts(by: userProvider.currentUser().id)![indexPath.item].image
+            return UICollectionViewCell()
         }
-        cell.backgroundView = imageView
-    
-        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! ProfileHeaderCollectionReusableView
-        
+
         var user: User
         if let currUser = currentUser {
             user = currUser
         } else {
-            user = userProvider.currentUser()
+            fatalError()
         }
-        
+
         headerView.avatar.image = user.avatar
         headerView.fullName.text = user.fullName
         headerView.followers.setTitle("Followers: \(user.followedByCount)", for: .normal)
         headerView.following.setTitle("Following: \(user.followsCount)", for: .normal)
         addActions(user, headerView)
-        
+
         return headerView
     }
 
@@ -185,11 +219,33 @@ extension ProfileCollectionViewController {
             
             destination.title = dataButton.titlePage
             
+            let prepareGroup = DispatchGroup()
+            
+            prepareGroup.enter()
+            
             if dataButton.titlePage!.contains("Following") {
-                users = userProvider.usersFollowedByUser(with: dataButton.userID!)!
+                userProvider.usersFollowedByUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                    usersFound in
+                    
+                    for user in usersFound! {
+                        users.append(user)
+                    }
+                    
+                    prepareGroup.leave()
+                })
             } else {
-                users = userProvider.usersFollowingUser(with: dataButton.userID!)!
+                userProvider.usersFollowingUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                    usersFound in
+                    
+                    for user in usersFound! {
+                        users.append(user)
+                    }
+                    
+                    prepareGroup.leave()
+                })
             }
+            
+            prepareGroup.wait()
             
             destination.users = [User.Identifier]()
             

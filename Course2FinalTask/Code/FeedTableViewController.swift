@@ -11,13 +11,24 @@ import DataProvider
 
 class FeedTableViewController: UITableViewController {
     
-    let posts = DataProviders.shared.postsDataProvider.feed()
+    var posts: [Post]?
+    var indicator: UIActivityIndicatorView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Feed"
+        let feedGroup = DispatchGroup()
         
+        feedGroup.enter()
+        
+        DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
+            self.posts = newPosts
+            feedGroup.leave()
+        })
+        
+        feedGroup.wait()
+        
+        self.title = "Feed"
         self.tableView.estimatedRowHeight = 200.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = .none
@@ -31,10 +42,20 @@ class FeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        guard let posts = posts else {
+//            fatalError()
+            return 0
+        }
+        
         return posts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let posts = posts else {
+//            fatalError()
+            return UITableViewCell()
+        }
+        
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
 
         cell.configure(with: posts[indexPath.item])
@@ -81,7 +102,7 @@ class FeedTableViewController: UITableViewController {
                 likes.setTitle("Likes: \(countOfLikes)", for: .normal)
                 likes.layoutIfNeeded()
             }
-            DataProviders.shared.postsDataProvider.likePost(with: post)
+            DataProviders.shared.postsDataProvider.likePost(with: post, queue: DispatchQueue.global(qos: .background), handler: { _ in })
         } else {
             sender.tintColor = UIColor.lightGray
             
@@ -95,7 +116,7 @@ class FeedTableViewController: UITableViewController {
                 likes.setTitle("Likes: \(countOfLikes)", for: .normal)
                 likes.layoutIfNeeded()
             }
-            DataProviders.shared.postsDataProvider.unlikePost(with: post)
+            DataProviders.shared.postsDataProvider.unlikePost(with: post, queue: DispatchQueue.global(qos: .background), handler: { _ in })
         }
     }
     
@@ -145,14 +166,36 @@ class FeedTableViewController: UITableViewController {
             return
         }
         
+        let prepareGroup = DispatchGroup()
+        
+        prepareGroup.enter()
+        
         if let destination = segue.destination as? UsersListTableViewController {
             destination.title = dataButton.titlePage
-            destination.users = DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!)
+            
+            DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!, queue: DispatchQueue.global(qos: .userInitiated), handler: {
+                users in
+                
+                destination.users = [User.Identifier]()
+                
+                for user in users! {
+                    destination.users?.append(user.id)
+                }
+                
+                prepareGroup.leave()
+            })
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
-            destination.currentUser = DataProviders.shared.usersDataProvider.user(with: dataButton.userID!)
+            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInitiated), handler: {
+                user in
+                destination.currentUser = user
+                
+                prepareGroup.leave()
+            })
         }
+        
+        prepareGroup.wait()
     }
 
 }

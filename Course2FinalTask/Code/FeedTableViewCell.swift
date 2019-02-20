@@ -46,9 +46,20 @@ class FeedTableViewCell: UITableViewCell {
         
         timeLabel.text = date
         
-        let usersLikedPost = DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id)!
+        var usersLikedPost = [User.Identifier]()
+        var currentUserId = User.Identifier(rawValue: "")
+        DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id, queue: DispatchQueue.global(qos: .background), handler: {
+            users in
+            for user in users! {
+                usersLikedPost.append(user.id)
+            }
+        })
+        DataProviders.shared.usersDataProvider.currentUser(queue: DispatchQueue.global(qos: .background), handler: {
+            user in
+            currentUserId = user!.id
+        })
         
-        if usersLikedPost.contains(DataProviders.shared.usersDataProvider.currentUser().id) {
+        if usersLikedPost.contains(currentUserId) {
             likeButton.tintColor = UIView().tintColor
         } else {
             likeButton.tintColor = UIColor.lightGray

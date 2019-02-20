@@ -31,6 +31,7 @@ class UsersListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = users?.count else  {
+            print(users)
             return 0
         }
         
@@ -40,10 +41,19 @@ class UsersListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "UserCell")!
         
-        if let user = userProvider.user(with: users![indexPath.item]) {
-            cell.textLabel?.text = user.username
-            cell.imageView?.image = user.avatar
-        }
+        let userGroup = DispatchGroup()
+        
+        userGroup.enter()
+        
+        userProvider.user(with: users![indexPath.item], queue: DispatchQueue.global(qos: .userInteractive), handler: {
+            user in
+            cell.textLabel?.text = user!.username
+            cell.imageView?.image = user!.avatar
+            
+            userGroup.leave()
+        })
+        
+        userGroup.wait()
         
         return cell
     }
@@ -68,7 +78,10 @@ class UsersListTableViewController: UITableViewController {
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
-            destination.currentUser = DataProviders.shared.usersDataProvider.user(with: dataButton.userID!)
+            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+                user in
+                destination.currentUser = user
+            })
         }
     }
 

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainVC = storyboard.instantiateInitialViewController()
             
             window.rootViewController = mainVC
+            
             window.makeKeyAndVisible()
         }
         
