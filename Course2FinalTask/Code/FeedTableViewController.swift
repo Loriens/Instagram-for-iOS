@@ -12,20 +12,22 @@ import DataProvider
 class FeedTableViewController: UITableViewController {
     
     var posts: [Post]?
-    var indicator: UIActivityIndicatorView?
+    var indicator: CustomActivityIndicator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let view = self.tabBarController?.view {
+            indicator = CustomActivityIndicator(view: view)
+        }
+        
         let feedGroup = DispatchGroup()
-        
         feedGroup.enter()
-        
+        // В данном месте целесообразно не ставить индикатор активности, потому что это окно открывается самым первым при открытии приложения
         DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
             self.posts = newPosts
             feedGroup.leave()
         })
-        
         feedGroup.wait()
         
         self.title = "Feed"
@@ -33,7 +35,12 @@ class FeedTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = .none
         self.tableView.allowsSelection = false
-        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")    }
+        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+        
+        if let view = indicator {
+            self.view.addSubview(view)
+        }
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
