@@ -18,21 +18,43 @@ class CustomActivityIndicator: UIActivityIndicatorView {
     }
     */
     
+    var wrap: UIView?
+    
     init(view: UIView) {
         let container = UIView()
         container.frame = view.frame
-        container.backgroundColor = UIColor.black
-        container.alpha = 0.7
+        container.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         
         super.init(frame: view.frame)
+        self.center = view.center
+        self.isHidden = true
+        self.hidesWhenStopped = true
         
+        container.isHidden = true
         container.addSubview(self)
+        wrap = container
         
-        view.addSubview(container)
+        view.addSubview(wrap!)
     }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func startAnimating() {
+        super.startAnimating()
+        
+        if let container = wrap {
+            container.isHidden = false
+        }
+    }
+    
+    override func stopAnimating() {
+        if let container = wrap {
+            container.isHidden = true
+        }
+        
+        super.stopAnimating()
     }
 
 }
