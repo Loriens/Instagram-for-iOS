@@ -16,7 +16,10 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     let dataProvider = DataProviders.shared.postsDataProvider
     let userProvider = DataProviders.shared.usersDataProvider
+    // Пользователь просматриваемой страницы
     var currentUser: User?
+    // true, если страница владельца аккаунта
+    var isBaseProfile = false
     var indicator: CustomActivityIndicator?
 
     override func viewDidLoad() {
@@ -29,10 +32,10 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         if let user = currentUser {
             self.navigationItem.title = user.username
         } else {
+            isBaseProfile = true
+            
             let currentUserGroup = DispatchGroup()
-            
             currentUserGroup.enter()
-            
             userProvider.currentUser(queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 user in
                 
@@ -40,7 +43,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 
                 currentUserGroup.leave()
             })
-            
             currentUserGroup.wait()
         }
         
@@ -134,6 +136,10 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         headerView.followers.setTitle("Followers: \(user.followedByCount)", for: .normal)
         headerView.following.setTitle("Following: \(user.followsCount)", for: .normal)
         addActions(user, headerView)
+        
+        if isBaseProfile {
+            headerView.follow.isHidden = true
+        }
 
         return headerView
     }
@@ -198,6 +204,7 @@ extension ProfileCollectionViewController {
     func addActions(_ user: User, _ headerView: ProfileHeaderCollectionReusableView) {
         headerView.followers.addTarget(self, action: #selector(followersButtonPressed(_:)), for: .touchUpInside)
         headerView.following.addTarget(self, action: #selector(followingButtonPressed(_:)), for: .touchUpInside)
+        headerView.follow.addTarget(self, action: #selector(followButtonPressed(_:)), for: .touchUpInside)
         
         headerView.followers.titlePage = "Followers"
         headerView.following.titlePage = "Following"
@@ -221,6 +228,29 @@ extension ProfileCollectionViewController {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
             self.indicator?.stopAnimating()
+        }
+    }
+    
+    @objc func followButtonPressed(_ sender: UIButton) {
+        guard let text = sender.titleLabel?.text else {
+            print("Text is not found")
+            return
+        }
+        
+        print(text)
+        
+        if text == "Follow" {
+            userProvider.follow(currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive)) { _ in
+            }
+            
+            sender.setTitle("Unfollow", for: .normal)
+            sender.sizeToFit()
+        } else {
+            userProvider.unfollow(currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive)) { _ in
+            }
+            
+            sender.setTitle("Follow", for: .normal)
+            sender.sizeToFit()
         }
     }
     
