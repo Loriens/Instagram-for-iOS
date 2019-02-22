@@ -46,12 +46,14 @@ class CustomActivityIndicator: UIActivityIndicatorView {
         
         if let container = wrap {
             container.isHidden = false
+//            self.isHidden = false
         }
     }
     
     override func stopAnimating() {
         if let container = wrap {
             container.isHidden = true
+//            self.isHidden = true
         }
         
         super.stopAnimating()

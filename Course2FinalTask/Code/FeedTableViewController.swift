@@ -12,7 +12,7 @@ import DataProvider
 class FeedTableViewController: UITableViewController {
     
     var posts: [Post]?
-    var indicator: CustomActivityIndicator?
+    var indicator: UIActivityIndicatorView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +36,6 @@ class FeedTableViewController: UITableViewController {
         self.tableView.separatorStyle = .none
         self.tableView.allowsSelection = false
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
-        
-        if let view = indicator {
-            self.view.addSubview(view)
-        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,7 +89,12 @@ class FeedTableViewController: UITableViewController {
     }
     
     @objc func authorButtonPressed(_ sender: DataUIButton) {
-        performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
+        indicator?.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
+            self.indicator?.stopAnimating()
+        }
     }
     
     @objc func likeButtonPressed(_ sender: DataUIButton) {
@@ -160,12 +161,22 @@ class FeedTableViewController: UITableViewController {
         let point = sender.location(in: view)
         
         if view.avatarImage.frame.contains(point) {
-            performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: view.author)
+            indicator?.startAnimating()
+            
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: view.author)
+                self.indicator?.stopAnimating()
+            }
         }
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {
-        performSegue(withIdentifier: "showLikes", sender: sender)
+        indicator?.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showLikes", sender: sender)
+            self.indicator?.stopAnimating()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -180,7 +191,7 @@ class FeedTableViewController: UITableViewController {
         if let destination = segue.destination as? UsersListTableViewController {
             destination.title = dataButton.titlePage
             
-            DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!, queue: DispatchQueue.global(qos: .userInitiated), handler: {
+            DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 users in
                 
                 destination.users = [User.Identifier]()
@@ -194,7 +205,7 @@ class FeedTableViewController: UITableViewController {
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
-            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInitiated), handler: {
+            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 user in
                 destination.currentUser = user
                 
@@ -203,6 +214,7 @@ class FeedTableViewController: UITableViewController {
         }
         
         prepareGroup.wait()
+
     }
 
 }

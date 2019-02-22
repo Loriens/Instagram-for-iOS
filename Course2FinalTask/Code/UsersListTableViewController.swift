@@ -13,9 +13,14 @@ class UsersListTableViewController: UITableViewController {
     
     var users: [User.Identifier]?
     var userProvider = DataProviders.shared.usersDataProvider
+    var indicator: CustomActivityIndicator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let view = self.tabBarController?.view {
+            indicator = CustomActivityIndicator(view: view)
+        }
 
         self.navigationController?.navigationItem.hidesBackButton = false
         
@@ -31,7 +36,6 @@ class UsersListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = users?.count else  {
-            print(users)
             return 0
         }
         
@@ -47,8 +51,10 @@ class UsersListTableViewController: UITableViewController {
         
         userProvider.user(with: users![indexPath.item], queue: DispatchQueue.global(qos: .userInteractive), handler: {
             user in
-            cell.textLabel?.text = user!.username
-            cell.imageView?.image = user!.avatar
+            DispatchQueue.main.async {
+                cell.textLabel?.text = user!.username
+                cell.imageView?.image = user!.avatar
+            }
             
             userGroup.leave()
         })
@@ -64,12 +70,18 @@ class UsersListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sender = DataUIButton()
+        
         guard let users = users else {
             return
         }
         sender.userID = users[indexPath.item]
         
-        performSegue(withIdentifier: "showUserProfileFromUsersList", sender: sender)
+        indicator?.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showUserProfileFromUsersList", sender: sender)
+            self.indicator?.stopAnimating()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -78,10 +90,17 @@ class UsersListTableViewController: UITableViewController {
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
+            let userGroup = DispatchGroup()
+            
+            userGroup.enter()
+            
             DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 user in
                 destination.currentUser = user
+                userGroup.leave()
             })
+            
+            userGroup.wait()
         }
     }
 

@@ -17,9 +17,14 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     let dataProvider = DataProviders.shared.postsDataProvider
     let userProvider = DataProviders.shared.usersDataProvider
     var currentUser: User?
+    var indicator: CustomActivityIndicator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let view = self.tabBarController?.view {
+            indicator = CustomActivityIndicator(view: view)
+        }
 
         if let user = currentUser {
             self.navigationItem.title = user.username
@@ -202,11 +207,21 @@ extension ProfileCollectionViewController {
     }
     
     @objc func followersButtonPressed(_ sender: DataUIButton) {
-        performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+        indicator?.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+            self.indicator?.stopAnimating()
+        }
     }
     
     @objc func followingButtonPressed(_ sender: DataUIButton) {
-        performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+        indicator?.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
+            self.indicator?.stopAnimating()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
