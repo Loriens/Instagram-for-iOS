@@ -13,6 +13,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var followers: DataUIButton!
     @IBOutlet weak var following: DataUIButton!
+    @IBOutlet weak var follow: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,6 +21,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         self.layoutIfNeeded()
         avatar.layer.cornerRadius = avatar.frame.height / 2.0
         avatar.layer.masksToBounds = true
+        follow.sizeToFit()
     }
     
 }

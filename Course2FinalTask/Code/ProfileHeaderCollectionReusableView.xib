@@ -43,13 +43,28 @@
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOs-cO-9XM">
+                    <rect key="frame" x="244" y="8" width="60" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.37647058820000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                    <state key="normal" title="Follow">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="2of-E2-CA0" secondAttribute="bottom" constant="8" id="4ro-Wr-nL2"/>
+                <constraint firstItem="GOs-cO-9XM" firstAttribute="trailing" secondItem="Slm-ps-IhK" secondAttribute="trailing" id="4wa-SD-0I0"/>
                 <constraint firstItem="9k7-8v-HFJ" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" constant="8" id="5wq-ko-v6W"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Slm-ps-IhK" secondAttribute="bottom" constant="8" id="8VA-Nc-ots"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="Slm-ps-IhK" secondAttribute="trailing" constant="16" id="Bnp-qr-AQr"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="PGb-81-IPd" secondAttribute="bottom" constant="8" id="V3K-sJ-tue"/>
+                <constraint firstItem="GOs-cO-9XM" firstAttribute="top" secondItem="9k7-8v-HFJ" secondAttribute="top" id="V62-d3-vkA"/>
                 <constraint firstItem="PGb-81-IPd" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" constant="8" id="aY0-W8-mwE"/>
                 <constraint firstItem="2of-E2-CA0" firstAttribute="leading" secondItem="PGb-81-IPd" secondAttribute="trailing" constant="8" id="oJa-bs-FEq"/>
                 <constraint firstItem="9k7-8v-HFJ" firstAttribute="leading" secondItem="PGb-81-IPd" secondAttribute="trailing" constant="8" id="sc0-wk-uWm"/>
@@ -58,6 +73,7 @@
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>
                 <outlet property="avatar" destination="PGb-81-IPd" id="j59-R0-q3L"/>
+                <outlet property="follow" destination="GOs-cO-9XM" id="9bl-Fg-8G7"/>
                 <outlet property="followers" destination="2of-E2-CA0" id="hJy-55-Mj6"/>
                 <outlet property="following" destination="Slm-ps-IhK" id="Ylk-mF-AfT"/>
                 <outlet property="fullName" destination="9k7-8v-HFJ" id="mIO-L9-srp"/>
