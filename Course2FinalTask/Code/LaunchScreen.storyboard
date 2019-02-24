@@ -52,6 +52,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="5TC-z3-t4N" kind="relationship" relationship="viewControllers" id="6jO-c7-nWh"/>
+                        <segue destination="EAh-O6-DXK" kind="relationship" relationship="viewControllers" id="J7r-3m-ona"/>
                         <segue destination="Ysi-fp-GI6" kind="relationship" relationship="viewControllers" id="WxG-wy-qB1"/>
                     </connections>
                 </tabBarController>
@@ -78,9 +79,25 @@
             </objects>
             <point key="canvasLocation" x="717.60000000000002" y="1029.5352323838081"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="PEl-wL-oFc">
+            <objects>
+                <viewController id="EAh-O6-DXK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1VH-9I-jCN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Gjr-CW-CpF"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="plus" id="tMc-YI-0Zz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Br-0i-AtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="feed" width="40" height="40"/>
+        <image name="plus" width="20" height="20"/>
         <image name="profile" width="40" height="40"/>
     </resources>
 </document>

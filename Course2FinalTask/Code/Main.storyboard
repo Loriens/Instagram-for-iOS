@@ -20,6 +20,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="NGI-vS-Sc3" kind="relationship" relationship="viewControllers" id="Yrc-hN-nBt"/>
+                        <segue destination="VUL-nB-khd" kind="relationship" relationship="viewControllers" id="5Pn-vz-ITV"/>
                         <segue destination="esV-yw-pkK" kind="relationship" relationship="viewControllers" id="Ydl-Od-rUb"/>
                     </connections>
                 </tabBarController>
@@ -58,7 +59,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4818.75" y="984.50704225352115"/>
+            <point key="canvasLocation" x="5816.25" y="984.50704225352115"/>
         </scene>
         <!--Feed-->
         <scene sceneID="qve-tG-Igy">
@@ -190,13 +191,67 @@
             </objects>
             <point key="canvasLocation" x="-1074.375" y="1007.7464788732394"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="hNd-Uh-Nkk">
+            <objects>
+                <collectionViewController id="6m9-Qd-Qpr" customClass="NewPostCollectionViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XZD-Xz-vB1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ax6-9E-Uy9">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="vaX-6u-Ddr">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="6m9-Qd-Qpr" id="KaV-e9-U4f"/>
+                            <outlet property="delegate" destination="6m9-Qd-Qpr" id="8OQ-yd-nXV"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Svq-oD-KdD"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJF-xX-D3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518.125" y="1211.6197183098591"/>
+        </scene>
+        <!--New-->
+        <scene sceneID="Xlm-HU-oak">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VUL-nB-khd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="New" image="plus" id="6Wa-Mc-Gx6"/>
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dTy-jV-q8v">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6m9-Qd-Qpr" kind="relationship" relationship="viewControllers" id="aS0-cA-6f0"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uXn-Pf-SDX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520.625" y="1211.6197183098591"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed" width="40" height="40"/>
+        <image name="plus" width="20" height="20"/>
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="m5w-wq-0kN"/>
-        <segue reference="AyH-S1-3bR"/>
+        <segue reference="H4r-4V-MLX"/>
     </inferredMetricsTieBreakers>
 </document>
