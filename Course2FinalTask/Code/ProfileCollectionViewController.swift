@@ -178,6 +178,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print(self.collectionView!.frame.width)
         return CGSize(width: self.collectionView!.frame.width / 3, height: self.collectionView!.frame.width / 3)
     }
     
