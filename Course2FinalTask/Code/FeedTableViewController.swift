@@ -207,6 +207,7 @@ class FeedTableViewController: UITableViewController {
         if let destination = segue.destination as? ProfileCollectionViewController {
             DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 user in
+                
                 destination.currentUser = user
                 
                 prepareGroup.leave()

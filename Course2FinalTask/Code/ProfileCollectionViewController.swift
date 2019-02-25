@@ -178,7 +178,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(self.collectionView!.frame.width)
         return CGSize(width: self.collectionView!.frame.width / 3, height: self.collectionView!.frame.width / 3)
     }
     
@@ -237,8 +236,6 @@ extension ProfileCollectionViewController {
             print("Text is not found")
             return
         }
-        
-        print(text)
         
         if text == "Follow" {
             userProvider.follow(currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive)) { _ in
