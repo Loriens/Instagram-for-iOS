@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -170,7 +171,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6Y-2r-T92" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1095" y="394.01408450704224"/>
+            <point key="canvasLocation" x="2092.5" y="394.01408450704224"/>
         </scene>
         <!--Profile-->
         <scene sceneID="z9u-eh-DOf">
@@ -220,7 +221,7 @@
                             <outlet property="delegate" destination="6m9-Qd-Qpr" id="8OQ-yd-nXV"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Svq-oD-KdD"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Item" id="Svq-oD-KdD"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJF-xX-D3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -233,6 +234,7 @@
                     <tabBarItem key="tabBarItem" title="New" image="plus" id="6Wa-Mc-Gx6"/>
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dTy-jV-q8v">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -244,6 +246,55 @@
             </objects>
             <point key="canvasLocation" x="1520.625" y="1211.6197183098591"/>
         </scene>
+        <!--Filter-->
+        <scene sceneID="xCq-RU-eLg">
+            <objects>
+                <viewController id="Wfa-8C-Ima" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i8Q-c8-b2r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08O-mw-tDF">
+                                <rect key="frame" x="0.0" y="64" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="08O-mw-tDF" secondAttribute="height" multiplier="1:1" id="2R1-0e-YDf"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="08O-mw-tDF" firstAttribute="leading" secondItem="dCj-qR-rDF" secondAttribute="leading" id="SD3-iR-HH7"/>
+                            <constraint firstItem="08O-mw-tDF" firstAttribute="width" secondItem="i8Q-c8-b2r" secondAttribute="width" id="ooT-SD-9Zp"/>
+                            <constraint firstItem="08O-mw-tDF" firstAttribute="top" secondItem="dCj-qR-rDF" secondAttribute="top" id="rLh-sj-ncU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dCj-qR-rDF"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Filter" id="h93-3F-FfN">
+                        <barButtonItem key="backBarButtonItem" title="New post" id="6Z5-3Z-lyd"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9KX-d4-wd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-76.875" y="293.66197183098592"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OWb-TS-QV0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kEP-eE-rkr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fY6-H4-dFj">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wfa-8C-Ima" kind="relationship" relationship="rootViewController" id="j1l-NJ-xRB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="67Z-QR-mSL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1074.375" y="-420.42253521126759"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed" width="40" height="40"/>
@@ -251,7 +302,7 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m5w-wq-0kN"/>
+        <segue reference="aAK-VV-v0z"/>
         <segue reference="H4r-4V-MLX"/>
     </inferredMetricsTieBreakers>
 </document>
