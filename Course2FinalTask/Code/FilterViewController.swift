@@ -9,11 +9,16 @@
 import UIKit
 
 class FilterViewController: UIViewController {
-
+    
+    @IBOutlet weak var mainImage: UIImageView!
+    var tempImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let image = tempImage {
+            mainImage.image = image
+        }
     }
     
 

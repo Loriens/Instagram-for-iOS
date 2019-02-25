@@ -60,7 +60,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7D-vd-KKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5816.25" y="984.50704225352115"/>
+            <point key="canvasLocation" x="6813.75" y="984.50704225352115"/>
         </scene>
         <!--Feed-->
         <scene sceneID="qve-tG-Igy">
@@ -192,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="-1074.375" y="1007.7464788732394"/>
         </scene>
-        <!--Item-->
+        <!--New post-->
         <scene sceneID="hNd-Uh-Nkk">
             <objects>
                 <collectionViewController id="6m9-Qd-Qpr" customClass="NewPostCollectionViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -221,11 +221,14 @@
                             <outlet property="delegate" destination="6m9-Qd-Qpr" id="8OQ-yd-nXV"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="Item" id="Svq-oD-KdD"/>
+                    <navigationItem key="navigationItem" title="New post" id="yIS-BX-gbV"/>
+                    <connections>
+                        <segue destination="Wfa-8C-Ima" kind="show" identifier="showFilters" id="wVv-8K-gQu"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJF-xX-D3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2518.125" y="1211.6197183098591"/>
+            <point key="canvasLocation" x="3515.625" y="1211.6197183098591"/>
         </scene>
         <!--New-->
         <scene sceneID="Xlm-HU-oak">
@@ -239,7 +242,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="6m9-Qd-Qpr" kind="relationship" relationship="viewControllers" id="aS0-cA-6f0"/>
+                        <segue destination="Hfx-Dy-xPa" kind="relationship" relationship="viewControllers" id="aS0-cA-6f0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXn-Pf-SDX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -249,7 +252,7 @@
         <!--Filter-->
         <scene sceneID="xCq-RU-eLg">
             <objects>
-                <viewController id="Wfa-8C-Ima" sceneMemberID="viewController">
+                <viewController id="Wfa-8C-Ima" customClass="FilterViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8Q-c8-b2r">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -272,6 +275,9 @@
                     <navigationItem key="navigationItem" title="Filter" id="h93-3F-FfN">
                         <barButtonItem key="backBarButtonItem" title="New post" id="6Z5-3Z-lyd"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mainImage" destination="08O-mw-tDF" id="Rsg-qh-ecK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9KX-d4-wd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -295,6 +301,25 @@
             </objects>
             <point key="canvasLocation" x="-1074.375" y="-420.42253521126759"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="egK-At-5hI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hfx-Dy-xPa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Item" id="Svq-oD-KdD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v6f-nv-PWX">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6m9-Qd-Qpr" kind="relationship" relationship="rootViewController" id="AmO-C6-0jh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dlb-wR-e6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518.125" y="1211.6197183098591"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed" width="40" height="40"/>
@@ -302,7 +327,8 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aAK-VV-v0z"/>
+        <segue reference="wVv-8K-gQu"/>
+        <segue reference="8Ao-jY-jiz"/>
         <segue reference="H4r-4V-MLX"/>
     </inferredMetricsTieBreakers>
 </document>

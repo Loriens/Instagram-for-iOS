@@ -18,11 +18,7 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
-        self.title = "New post"
         photos = photoProvider.photos()
 
         // Register cell classes
@@ -65,6 +61,9 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
         if let photo = photos?[indexPath.item] {
             imageView.image = photo
             cell.backgroundView = imageView
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tappedImage(_:)))
+            cell.addGestureRecognizer(tap)
         }
     
         return cell
@@ -83,9 +82,28 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.collectionView!.frame.width, height: 86.0)
-    }
 
+}
+
+// Add actions
+
+extension NewPostCollectionViewController {
+    
+    @objc func tappedImage(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view as? UICollectionViewCell else {
+            return
+        }
+        
+        self.performSegue(withIdentifier: "showFilters", sender: view.backgroundView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destination = segue.destination as? FilterViewController {
+            if let imageView = sender as? UIImageView {
+                destination.tempImage = imageView.image
+            }
+        }
+    }
+    
 }
