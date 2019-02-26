@@ -11,6 +11,7 @@
 		7484B05520441FD000BDE1A6 /* DataProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7484B05320441FD000BDE1A6 /* DataProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B79257202B3254006BCB41 /* AppDelegate.swift */; };
 		74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B7925E202B3254006BCB41 /* Assets.xcassets */; };
+		86228D28222569A1004E9D2C /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86228D27222569A1004E9D2C /* ImageFilter.swift */; };
 		8674BE7D2224658B009DFD4E /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8674BE7C2224658B009DFD4E /* FilterViewController.swift */; };
 		867B0CA9221ED79E001C5E9B /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867B0CA8221ED79E001C5E9B /* CustomActivityIndicator.swift */; };
 		8687E59321B8243E00A403AB /* UsersListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8687E59221B8243E00A403AB /* UsersListTableViewController.swift */; };
@@ -48,6 +49,7 @@
 		74B79257202B3254006BCB41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74B7925E202B3254006BCB41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74B79263202B3254006BCB41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86228D27222569A1004E9D2C /* ImageFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilter.swift; sourceTree = "<group>"; };
 		8674BE7C2224658B009DFD4E /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		867B0CA8221ED79E001C5E9B /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		8687E59221B8243E00A403AB /* UsersListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListTableViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8674BE7C2224658B009DFD4E /* FilterViewController.swift */,
 				86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */,
 				86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */,
+				86228D27222569A1004E9D2C /* ImageFilter.swift */,
 				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
@@ -228,6 +231,7 @@
 				86FF617221BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				8687E59321B8243E00A403AB /* UsersListTableViewController.swift in Sources */,
 				867B0CA9221ED79E001C5E9B /* CustomActivityIndicator.swift in Sources */,
+				86228D28222569A1004E9D2C /* ImageFilter.swift in Sources */,
 				8687E59A21B95C0300A403AB /* ProfileCollectionViewController.swift in Sources */,
 				86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */,
 			);

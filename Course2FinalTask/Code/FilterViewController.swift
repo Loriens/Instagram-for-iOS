@@ -13,6 +13,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     var tempImage: UIImage?
+    var filterNames: [String]?
     let reuseIdentifier = "FilterCell"
     
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ class FilterViewController: UIViewController {
         if let image = tempImage {
             mainImage.image = image
         }
+        
+        filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
         
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
@@ -46,11 +49,17 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        guard let filterCount = filterNames?.count else {
+            return 0
+        }
+        
+        return filterCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterCollectionViewCell
+        
+        cell.filterName.text = filterNames?[indexPath.item]
         
         return cell
     }
