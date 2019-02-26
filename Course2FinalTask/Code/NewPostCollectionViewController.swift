@@ -104,7 +104,6 @@ extension NewPostCollectionViewController {
         
         if let destination = segue.destination as? FilterViewController {
             if let cell = sender as? NewPostCollectionViewCell {
-                print(cell.item!)
                 destination.previewImage = previewPhotoForSegue?[cell.item!]
                 
                 if let imageView = cell.backgroundView as? UIImageView {

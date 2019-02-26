@@ -45,7 +45,9 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterCollectionViewCell
         
         cell.filterName.text = filterNames[indexPath.item]
-        cell.previewImage.image = previewImage
+        if let ciimage = CIImage(image: previewImage!) {
+            cell.previewImage.image = filter.applyFilter(name: filterNames[indexPath.item], params: [kCIInputImageKey: ciimage])
+        }
         
 //        DispatchQueue.global(qos: .userInitiated).async {
 //
