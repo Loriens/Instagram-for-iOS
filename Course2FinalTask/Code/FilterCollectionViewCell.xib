@@ -19,14 +19,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="120" height="80"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05I-c0-oZL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05I-c0-oZL">
                         <rect key="frame" x="35" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" red="0.99614506960000004" green="0.1613139505" blue="0.1948131729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="05I-c0-oZL" secondAttribute="height" multiplier="1:1" id="0hu-ta-KBz"/>
                             <constraint firstAttribute="width" constant="50" id="Aol-zU-fjY"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="CIColorInvert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJo-X1-6mP">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CIColorInvert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJo-X1-6mP">
                         <rect key="frame" x="9.5" y="58" width="101" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -36,12 +37,13 @@
             </view>
             <constraints>
                 <constraint firstItem="05I-c0-oZL" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="N22-ew-nLF"/>
+                <constraint firstItem="kJo-X1-6mP" firstAttribute="top" secondItem="05I-c0-oZL" secondAttribute="bottom" constant="8" id="QPh-iX-3UN"/>
                 <constraint firstItem="kJo-X1-6mP" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="Ryt-9f-FqO"/>
-                <constraint firstItem="kJo-X1-6mP" firstAttribute="bottom" secondItem="05I-c0-oZL" secondAttribute="bottom" id="V0d-Fx-zUw"/>
+                <constraint firstItem="05I-c0-oZL" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="VzB-FW-bA1"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="96" height="89"/>
-            <point key="canvasLocation" x="174.40000000000001" y="172.26386806596702"/>
+            <point key="canvasLocation" x="174.40000000000001" y="171.81409295352324"/>
         </collectionViewCell>
     </objects>
 </document>
