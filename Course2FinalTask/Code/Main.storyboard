@@ -263,9 +263,35 @@
                                     <constraint firstAttribute="width" secondItem="08O-mw-tDF" secondAttribute="height" multiplier="1:1" id="2R1-0e-YDf"/>
                                 </constraints>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZhR-Rc-M1v">
+                                <rect key="frame" x="16" y="420" width="304" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ayu-Kc-fuv">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7ZY-yN-I4O">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Wfa-8C-Ima" id="9KO-kL-JOw"/>
+                                    <outlet property="delegate" destination="Wfa-8C-Ima" id="8m9-2L-Zkr"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ZhR-Rc-M1v" firstAttribute="leading" secondItem="dCj-qR-rDF" secondAttribute="leading" constant="16" id="E4v-2r-Nds"/>
+                            <constraint firstItem="ZhR-Rc-M1v" firstAttribute="width" secondItem="i8Q-c8-b2r" secondAttribute="width" constant="-16" id="Lt7-fM-bcK"/>
                             <constraint firstItem="08O-mw-tDF" firstAttribute="leading" secondItem="dCj-qR-rDF" secondAttribute="leading" id="SD3-iR-HH7"/>
                             <constraint firstItem="08O-mw-tDF" firstAttribute="width" secondItem="i8Q-c8-b2r" secondAttribute="width" id="ooT-SD-9Zp"/>
                             <constraint firstItem="08O-mw-tDF" firstAttribute="top" secondItem="dCj-qR-rDF" secondAttribute="top" id="rLh-sj-ncU"/>
@@ -276,6 +302,7 @@
                         <barButtonItem key="backBarButtonItem" title="New post" id="6Z5-3Z-lyd"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="filtersCollectionView" destination="ZhR-Rc-M1v" id="k0q-6K-EmA"/>
                         <outlet property="mainImage" destination="08O-mw-tDF" id="Rsg-qh-ecK"/>
                     </connections>
                 </viewController>
@@ -327,7 +354,7 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wVv-8K-gQu"/>
+        <segue reference="j1l-NJ-xRB"/>
         <segue reference="8Ao-jY-jiz"/>
         <segue reference="H4r-4V-MLX"/>
     </inferredMetricsTieBreakers>
