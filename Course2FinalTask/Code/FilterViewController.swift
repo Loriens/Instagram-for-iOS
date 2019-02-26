@@ -13,9 +13,10 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     var tempImage: UIImage?
+    var previewImage: UIImage?
     private let filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
     private let filter = ImageFilter()
-    let reuseIdentifier = "FilterCell"
+    private let reuseIdentifier = "FilterCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterCollectionViewCell
         
         cell.filterName.text = filterNames[indexPath.item]
+        cell.previewImage.image = previewImage
         
 //        DispatchQueue.global(qos: .userInitiated).async {
 //

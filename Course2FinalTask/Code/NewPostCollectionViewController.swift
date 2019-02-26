@@ -15,14 +15,16 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
     
     let photoProvider = DataProviders.shared.photoProvider
     var photos: [UIImage]?
+    var previewPhotoForSegue: [UIImage]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         photos = photoProvider.photos()
+        previewPhotoForSegue = photoProvider.thumbnailPhotos()
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(NewPostCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -55,12 +57,13 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! NewPostCollectionViewCell
     
         let imageView = UIImageView(frame: cell.frame)
         if let photo = photos?[indexPath.item] {
             imageView.image = photo
             cell.backgroundView = imageView
+            cell.item = indexPath.item
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(tappedImage(_:)))
             cell.addGestureRecognizer(tap)
@@ -90,18 +93,23 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
 extension NewPostCollectionViewController {
     
     @objc func tappedImage(_ sender: UITapGestureRecognizer) {
-        guard let view = sender.view as? UICollectionViewCell else {
+        guard let view = sender.view as? NewPostCollectionViewCell else {
             return
         }
         
-        self.performSegue(withIdentifier: "showFilters", sender: view.backgroundView)
+        self.performSegue(withIdentifier: "showFilters", sender: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destination = segue.destination as? FilterViewController {
-            if let imageView = sender as? UIImageView {
-                destination.tempImage = imageView.image
+            if let cell = sender as? NewPostCollectionViewCell {
+                print(cell.item!)
+                destination.previewImage = previewPhotoForSegue?[cell.item!]
+                
+                if let imageView = cell.backgroundView as? UIImageView {
+                    destination.tempImage = imageView.image
+                }
             }
         }
     }
