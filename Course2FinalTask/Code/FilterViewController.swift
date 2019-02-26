@@ -11,6 +11,7 @@ import UIKit
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var filtersCollectionView: UICollectionView!
     var tempImage: UIImage?
     
     override func viewDidLoad() {
@@ -32,4 +33,14 @@ class FilterViewController: UIViewController {
     }
     */
 
+}
+
+extension FilterViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
 }

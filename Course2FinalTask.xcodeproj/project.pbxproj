@@ -21,6 +21,8 @@
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
 		86CF406B21B6BC68007C0FAE /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */; };
 		86CF6B462222C3580035084C /* NewPostCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */; };
+		86F0ADAE2225232A0048A929 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */; };
+		86F0ADAF2225232A0048A929 /* FilterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */; };
 		86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F911B221B5B0BF004E38D0 /* Main.storyboard */; };
 		86FF617221BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */; };
 		86FF617321BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */; };
@@ -56,6 +58,8 @@
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCollectionViewController.swift; sourceTree = "<group>"; };
+		86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCollectionViewCell.xib; sourceTree = "<group>"; };
 		86F911B221B5B0BF004E38D0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				86F911B221B5B0BF004E38D0 /* Main.storyboard */,
 				8674BE7C2224658B009DFD4E /* FilterViewController.swift */,
+				86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */,
+				86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */,
 				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
@@ -201,6 +207,7 @@
 				86CF406B21B6BC68007C0FAE /* FeedTableViewCell.xib in Resources */,
 				74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */,
 				86FF617321BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib in Resources */,
+				86F0ADAF2225232A0048A929 /* FilterCollectionViewCell.xib in Resources */,
 				86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +223,7 @@
 				86CF6B462222C3580035084C /* NewPostCollectionViewController.swift in Sources */,
 				8687E59521B938D400A403AB /* DataUIButton.swift in Sources */,
 				86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */,
+				86F0ADAE2225232A0048A929 /* FilterCollectionViewCell.swift in Sources */,
 				8674BE7D2224658B009DFD4E /* FilterViewController.swift in Sources */,
 				86FF617221BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				8687E59321B8243E00A403AB /* UsersListTableViewController.swift in Sources */,
