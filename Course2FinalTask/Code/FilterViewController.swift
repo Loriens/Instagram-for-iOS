@@ -13,7 +13,8 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     var tempImage: UIImage?
-    var filterNames: [String]?
+    private let filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
+    private let filter = ImageFilter()
     let reuseIdentifier = "FilterCell"
     
     override func viewDidLoad() {
@@ -23,23 +24,10 @@ class FilterViewController: UIViewController {
             mainImage.image = image
         }
         
-        filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
-        
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
         filtersCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -49,17 +37,17 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let filterCount = filterNames?.count else {
-            return 0
-        }
-        
-        return filterCount
+        return filterNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterCollectionViewCell
         
-        cell.filterName.text = filterNames?[indexPath.item]
+        cell.filterName.text = filterNames[indexPath.item]
+        
+//        DispatchQueue.global(qos: .userInitiated).async {
+//
+//        }
         
         return cell
     }
