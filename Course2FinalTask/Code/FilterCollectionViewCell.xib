@@ -21,7 +21,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05I-c0-oZL">
                         <rect key="frame" x="35" y="0.0" width="50" height="50"/>
-                        <color key="backgroundColor" red="0.99614506960000004" green="0.1613139505" blue="0.1948131729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="05I-c0-oZL" secondAttribute="height" multiplier="1:1" id="0hu-ta-KBz"/>
                             <constraint firstAttribute="width" constant="50" id="Aol-zU-fjY"/>
