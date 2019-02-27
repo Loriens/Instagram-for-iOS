@@ -227,6 +227,7 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJF-xX-D3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mdy-T2-4pE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3515.625" y="1211.6197183098591"/>
         </scene>
@@ -389,6 +390,7 @@
                     <connections>
                         <outlet property="descriptionField" destination="V7v-lx-ri1" id="nBg-Eo-yii"/>
                         <outlet property="imageView" destination="aJh-p6-tNQ" id="RBm-xM-Uz6"/>
+                        <segue destination="mdy-T2-4pE" kind="unwind" identifier="unwindToNewPostVC" unwindAction="unwintToNewPostVCWithSegue:" id="7MS-ri-bSK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mg-KH-2y4" userLabel="First Responder" sceneMemberID="firstResponder"/>

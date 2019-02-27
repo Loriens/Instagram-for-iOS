@@ -11,7 +11,7 @@ import DataProvider
 
 private let reuseIdentifier = "PhotoCell"
 
-class NewPostCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class NewPostCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITabBarControllerDelegate {
     
     let photoProvider = DataProviders.shared.photoProvider
     var photos: [UIImage]?
@@ -25,8 +25,13 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
 
         // Register cell classes
         self.collectionView!.register(NewPostCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.tabBarController?.delegate = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    //  Функция вызывается после публикации фото
+    @IBAction func unwintToNewPostVC(segue: UIStoryboardSegue) {
     }
 
     /*

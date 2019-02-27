@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DataProvider
 
 class DescriptionPostViewController: UIViewController {
     
@@ -20,19 +21,34 @@ class DescriptionPostViewController: UIViewController {
         if let image = tempImage {
             imageView.image = image
         }
+        
+        let nextButton = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(barItemSharePressed(_:)))
+        self.navigationItem.rightBarButtonItem = nextButton
+    }
 
-        // Do any additional setup after loading the view.
+}
+
+// Add actions
+
+extension DescriptionPostViewController {
+    
+    @objc func barItemSharePressed(_ sender: Any?) {
+        let shareGroup = DispatchGroup()
+        
+        shareGroup.enter()
+        
+        DataProviders.shared.postsDataProvider.newPost(with: imageView.image!, description: descriptionField.text ?? "", queue: DispatchQueue.global(qos: .userInitiated), handler: {(post) in
+            if post != nil {
+                shareGroup.leave()
+            } else {
+                print("Post was not shared")
+                fatalError()
+            }
+        })
+        
+        shareGroup.wait()
+        
+        performSegue(withIdentifier: "unwindToNewPostVC", sender: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
