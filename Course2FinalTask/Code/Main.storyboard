@@ -171,7 +171,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6Y-2r-T92" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092.5" y="394.01408450704224"/>
+            <point key="canvasLocation" x="3090" y="394.01408450704224"/>
         </scene>
         <!--Profile-->
         <scene sceneID="z9u-eh-DOf">
@@ -341,6 +341,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dlb-wR-e6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2518.125" y="1211.6197183098591"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="bZP-x3-yvp">
+            <objects>
+                <viewController id="fAW-bY-3Eo" customClass="DescriptionPostViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Smg-Ip-Nyr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aJh-p6-tNQ">
+                                <rect key="frame" x="16" y="80" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aJh-p6-tNQ" secondAttribute="height" multiplier="1:1" id="h3V-tp-GL4"/>
+                                    <constraint firstAttribute="width" constant="100" id="qcH-x7-94H"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oo-pg-tca">
+                                <rect key="frame" x="16" y="212" width="121" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V7v-lx-ri1">
+                                <rect key="frame" x="16" y="241" width="288" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4oo-pg-tca" firstAttribute="top" secondItem="aJh-p6-tNQ" secondAttribute="bottom" constant="32" id="1lq-RP-NuZ"/>
+                            <constraint firstItem="aJh-p6-tNQ" firstAttribute="leading" secondItem="nn3-3n-cUr" secondAttribute="leading" constant="16" id="HU0-l1-KUs"/>
+                            <constraint firstItem="V7v-lx-ri1" firstAttribute="leading" secondItem="nn3-3n-cUr" secondAttribute="leading" constant="16" id="HUU-fM-jvx"/>
+                            <constraint firstItem="aJh-p6-tNQ" firstAttribute="top" secondItem="nn3-3n-cUr" secondAttribute="top" constant="16" id="LFe-57-ExZ"/>
+                            <constraint firstItem="V7v-lx-ri1" firstAttribute="top" secondItem="4oo-pg-tca" secondAttribute="bottom" constant="8" id="Mbr-ct-czv"/>
+                            <constraint firstItem="nn3-3n-cUr" firstAttribute="trailing" secondItem="V7v-lx-ri1" secondAttribute="trailing" constant="16" id="m4b-TE-WH7"/>
+                            <constraint firstItem="4oo-pg-tca" firstAttribute="leading" secondItem="nn3-3n-cUr" secondAttribute="leading" constant="16" id="qRb-Da-v1d"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nn3-3n-cUr"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="uI4-Hn-B5V">
+                        <barButtonItem key="backBarButtonItem" title="Filter" id="Qys-Mo-VEY"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionField" destination="V7v-lx-ri1" id="nBg-Eo-yii"/>
+                        <outlet property="imageView" destination="aJh-p6-tNQ" id="RBm-xM-Uz6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Mg-KH-2y4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1783.125" y="310.56338028169017"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wCZ-WC-U6K">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rjy-yG-WL2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="U6s-Ek-1Dk">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fAW-bY-3Eo" kind="relationship" relationship="rootViewController" id="VVZ-hc-fdH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGm-aF-gLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="785.625" y="-404.57746478873241"/>
         </scene>
     </scenes>
     <resources>
