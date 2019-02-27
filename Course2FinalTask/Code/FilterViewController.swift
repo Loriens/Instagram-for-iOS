@@ -14,12 +14,17 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     var tempImage: UIImage?
     var previewImage: UIImage?
+//    var indicator: CustomActivityIndicator?
     private let filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
     private let filter = ImageFilter()
     private let reuseIdentifier = "FilterCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        if let view = self.tabBarController?.view {
+//            indicator = CustomActivityIndicator(view: view)
+//        }
         
         if let image = tempImage {
             mainImage.image = image
@@ -56,6 +61,9 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
 
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedCell(_:)))
+        cell.addGestureRecognizer(tap)
+        
         return cell
     }
     
@@ -70,4 +78,38 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 16.0
     }
+}
+
+// Add actions
+
+extension FilterViewController {
+    
+    @objc func tappedCell(_ sender: UITapGestureRecognizer) {
+        
+//        indicator?.startAnimating()
+        
+        guard let view = sender.view as? FilterCollectionViewCell else {
+            return
+        }
+        
+        let filterGroup = DispatchGroup()
+        
+        filterGroup.enter()
+        let nameFilter = view.filterName.text!
+        var resultImage: UIImage?
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let ciimage = CIImage(image: self.tempImage!) {
+                resultImage = self.filter.applyFilter(name: nameFilter, params: [kCIInputImageKey: ciimage])
+                filterGroup.leave()
+            }
+        }
+        
+        filterGroup.wait()
+        DispatchQueue.main.async {
+            self.mainImage.image = resultImage
+//            self.indicator?.stopAnimating()
+        }
+    }
+    
 }
