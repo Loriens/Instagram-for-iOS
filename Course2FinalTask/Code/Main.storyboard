@@ -299,6 +299,7 @@
                     <connections>
                         <outlet property="filtersCollectionView" destination="wfr-gQ-XvA" id="1aG-w2-Xf5"/>
                         <outlet property="mainImage" destination="08O-mw-tDF" id="Rsg-qh-ecK"/>
+                        <segue destination="fAW-bY-3Eo" kind="show" identifier="showDescription" id="axU-Db-R5S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9KX-d4-wd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -342,7 +343,7 @@
             </objects>
             <point key="canvasLocation" x="2518.125" y="1211.6197183098591"/>
         </scene>
-        <!--Title-->
+        <!--Description Post View Controller-->
         <scene sceneID="bZP-x3-yvp">
             <objects>
                 <viewController id="fAW-bY-3Eo" customClass="DescriptionPostViewController" customModule="Course2FinalTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -382,7 +383,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nn3-3n-cUr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="uI4-Hn-B5V">
+                    <navigationItem key="navigationItem" id="uI4-Hn-B5V">
                         <barButtonItem key="backBarButtonItem" title="Filter" id="Qys-Mo-VEY"/>
                     </navigationItem>
                     <connections>
@@ -419,6 +420,7 @@
         <image name="profile" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="axU-Db-R5S"/>
         <segue reference="wVv-8K-gQu"/>
         <segue reference="aAK-VV-v0z"/>
         <segue reference="H4r-4V-MLX"/>

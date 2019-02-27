@@ -12,9 +12,14 @@ class DescriptionPostViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionField: UITextField!
+    var tempImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let image = tempImage {
+            imageView.image = image
+        }
 
         // Do any additional setup after loading the view.
     }

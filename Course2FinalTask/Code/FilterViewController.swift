@@ -30,6 +30,9 @@ class FilterViewController: UIViewController {
             mainImage.image = image
         }
         
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(barItemNextPressed(_:)))
+        self.navigationItem.rightBarButtonItem = nextButton
+        
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
         filtersCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
@@ -109,6 +112,16 @@ extension FilterViewController {
         DispatchQueue.main.async {
             self.mainImage.image = resultImage
 //            self.indicator?.stopAnimating()
+        }
+    }
+    
+    @objc func barItemNextPressed(_ sender: Any?) {
+        performSegue(withIdentifier: "showDescription", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DescriptionPostViewController {
+            destination.tempImage = mainImage.image
         }
     }
     
