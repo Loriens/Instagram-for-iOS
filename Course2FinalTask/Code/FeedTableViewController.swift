@@ -45,7 +45,6 @@ class FeedTableViewController: UITableViewController {
             let newCount = newPosts?.count
             if newCount! > self.posts!.count {
                 DispatchQueue.main.async {
-                    print("reload")
                     self.posts = newPosts
                     self.tableView.reloadData()
                 }
