@@ -17,7 +17,7 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.tabBarController?.view {
+        if let view = tabBarController?.view {
             indicator = CustomActivityIndicator(view: view)
         }
         
@@ -30,12 +30,27 @@ class FeedTableViewController: UITableViewController {
         })
         feedGroup.wait()
         
-        self.title = "Feed"
-        self.tableView.estimatedRowHeight = 200.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.separatorStyle = .none
-        self.tableView.allowsSelection = false
-        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+        title = "Feed"
+        tableView.estimatedRowHeight = 200.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
+            let newCount = newPosts?.count
+            if newCount! > self.posts!.count {
+                DispatchQueue.main.async {
+                    print("reload")
+                    self.posts = newPosts
+                    self.tableView.reloadData()
+                }
+            }
+        })
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

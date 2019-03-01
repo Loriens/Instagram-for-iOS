@@ -21,7 +21,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="NGI-vS-Sc3" kind="relationship" relationship="viewControllers" id="Yrc-hN-nBt"/>
-                        <segue destination="VUL-nB-khd" kind="relationship" relationship="viewControllers" id="5Pn-vz-ITV"/>
+                        <segue destination="Hfx-Dy-xPa" kind="relationship" relationship="viewControllers" id="4ES-tt-Fcg"/>
                         <segue destination="esV-yw-pkK" kind="relationship" relationship="viewControllers" id="Ydl-Od-rUb"/>
                     </connections>
                 </tabBarController>
@@ -221,6 +221,7 @@
                             <outlet property="delegate" destination="6m9-Qd-Qpr" id="8OQ-yd-nXV"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" title="New" image="plus" id="TRj-HZ-aB9"/>
                     <navigationItem key="navigationItem" title="New post" id="yIS-BX-gbV"/>
                     <connections>
                         <segue destination="Wfa-8C-Ima" kind="show" identifier="showFilters" id="wVv-8K-gQu"/>
@@ -230,25 +231,6 @@
                 <exit id="mdy-T2-4pE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3515.625" y="1211.6197183098591"/>
-        </scene>
-        <!--New-->
-        <scene sceneID="Xlm-HU-oak">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VUL-nB-khd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="New" image="plus" id="6Wa-Mc-Gx6"/>
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dTy-jV-q8v">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Hfx-Dy-xPa" kind="relationship" relationship="viewControllers" id="aS0-cA-6f0"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uXn-Pf-SDX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1520.625" y="1211.6197183098591"/>
         </scene>
         <!--Filter-->
         <scene sceneID="xCq-RU-eLg">

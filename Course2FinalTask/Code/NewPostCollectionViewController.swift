@@ -24,25 +24,17 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
         previewPhotoForSegue = photoProvider.thumbnailPhotos()
 
         // Register cell classes
-        self.collectionView!.register(NewPostCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.tabBarController?.delegate = self
+        collectionView!.register(NewPostCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        tabBarController?.delegate = self
 
         // Do any additional setup after loading the view.
     }
     
     //  Функция вызывается после публикации фото
     @IBAction func unwintToNewPostVC(segue: UIStoryboardSegue) {
+        tabBarController?.selectedIndex = 0
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
     // MARK: UICollectionViewDataSource
 
