@@ -101,7 +101,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             }
         })
     }
-
     /*
     // MARK: - Navigation
 
