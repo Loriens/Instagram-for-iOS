@@ -36,6 +36,27 @@ class FilterViewController: UIViewController {
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
         filtersCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        
+        // Размещаем фильтры по центру пустого места на экране
+        // Размеры фильтра
+        let widthFilter = filtersCollectionView.layer.frame.width
+        let heightFilter = filtersCollectionView.frame.height
+        //Отступы сверху и снизу для таб и нав баров
+        let window = UIApplication.shared.keyWindow
+        let topPadding = window?.safeAreaInsets.top
+        let bottomPadding = window?.safeAreaInsets.bottom
+        filtersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        // Отступ сверху для filterCollectionView
+        let topInset = (self.view.frame.height - mainImage.frame.height - topPadding! - bottomPadding!) / 2 - heightFilter
+        
+        // Настраиваем constraints
+        NSLayoutConstraint.activate([
+            filtersCollectionView.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: topInset),
+//            filtersCollectionView.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: bottomInset),
+            filtersCollectionView.heightAnchor.constraint(equalToConstant: heightFilter),
+            filtersCollectionView.widthAnchor.constraint(equalToConstant: widthFilter)
+        ])
+        
     }
 
 }
