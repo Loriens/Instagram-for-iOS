@@ -21,6 +21,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     // true, если страница владельца аккаунта
     var isBaseProfile = false
     var indicator: CustomActivityIndicator?
+    private var posts: [Post] = [Post]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             indicator = CustomActivityIndicator(view: view)
         }
 
+        // Определяем страницу пользователя, которую нужно отобразить
         if let user = currentUser {
             self.navigationItem.title = user.username
         } else {
@@ -40,20 +42,64 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 user in
                 
                 self.currentUser = user
+                DispatchQueue.main.async {
+                    self.title = user?.username
+                }
                 
                 currentUserGroup.leave()
             })
             currentUserGroup.wait()
         }
         
+        // Загружаем публикации пользователя
+        let findPostsGroup = DispatchGroup()
+        findPostsGroup.enter()
+        dataProvider.findPosts(by: currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+            posts in
+            
+            if let posts = posts {
+                let sortedPosts = posts.sorted(by: { firstPost, secondPost in
+                    return firstPost.createdTime > secondPost.createdTime
+                })
+                self.posts = sortedPosts
+                findPostsGroup.leave()
+            } else {
+                print("Posts are not found")
+            }
+        })
+        findPostsGroup.wait()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(UINib.init(nibName: "ProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView!.register(UINib.init(nibName: "ProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dataProvider.findPosts(by: currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
+            posts in
+            
+            if let posts = posts {
+                if posts.count > self.posts.count {
+                    let sortedPosts = posts.sorted(by: { firstPost, secondPost in
+                        return firstPost.createdTime > secondPost.createdTime
+                    })
+                    self.posts = sortedPosts
+                    DispatchQueue.main.async {
+                        print("reload")
+                        self.collectionView?.reloadData()
+                    }
+                }
+            } else {
+                print("Posts are not found")
+            }
+        })
     }
 
     /*
@@ -75,50 +121,17 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        var count = 0
-        
-        if let user = currentUser {
-            let findPostsGroup = DispatchGroup()
-            
-            findPostsGroup.enter()
-            
-            dataProvider.findPosts(by: user.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                posts in
-                count = posts!.count
-                findPostsGroup.leave()
-            })
-            
-            findPostsGroup.wait()
-        }
-        
-        return count
+        return posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let user = currentUser {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-            
-            let imageView = UIImageView(frame: cell.frame)
-            let findPostsGroup = DispatchGroup()
-            
-            findPostsGroup.enter()
-            
-            dataProvider.findPosts(by: user.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                posts in
-                DispatchQueue.main.async {
-                    imageView.image = posts![indexPath.item].image
-                    cell.backgroundView = imageView
-                }
-                findPostsGroup.leave()
-            })
-            
-            findPostsGroup.wait()
-            
-            return cell
-        } else {
-            return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        let imageView = UIImageView(frame: cell.frame)
+        imageView.image = posts[indexPath.item].image
+        cell.backgroundView = imageView
+        
+        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
