@@ -25,7 +25,12 @@ class FeedTableViewController: UITableViewController {
         feedGroup.enter()
         // В данном месте целесообразно не ставить индикатор активности, потому что это окно открывается самым первым при открытии приложения
         DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
-            self.posts = newPosts
+            if newPosts == nil {
+                self.present(AlertController.getAlert(), animated: true, completion: nil)
+                self.posts = [Post]()
+            } else {
+                self.posts = newPosts
+            }
             feedGroup.leave()
         })
         feedGroup.wait()
@@ -207,8 +212,13 @@ class FeedTableViewController: UITableViewController {
                 
                 destination.users = [User.Identifier]()
                 
-                for user in users! {
-                    destination.users?.append(user.id)
+                if users == nil {
+                    self.present(AlertController.getAlert(), animated: true, completion: nil)
+                    destination.users? = [User.Identifier]()
+                } else {
+                    for user in users! {
+                        destination.users?.append(user.id)
+                    }
                 }
                 
                 prepareGroup.leave()
@@ -223,7 +233,11 @@ class FeedTableViewController: UITableViewController {
             DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                 user in
                 
-                destination.currentUser = user
+                if user != nil {
+                    destination.currentUser = user
+                } else {
+                    self.present(AlertController.getAlert(), animated: true, completion: nil)
+                }
                 
                 prepareGroup.leave()
                 

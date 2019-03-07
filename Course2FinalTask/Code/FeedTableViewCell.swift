@@ -50,8 +50,11 @@ class FeedTableViewCell: UITableViewCell {
         var currentUserId = User.Identifier(rawValue: "")
         DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id, queue: DispatchQueue.global(qos: .background), handler: {
             users in
-            for user in users! {
-                usersLikedPost.append(user.id)
+            
+            if users != nil {
+                for user in users! {
+                    usersLikedPost.append(user.id)
+                }
             }
         })
         DataProviders.shared.usersDataProvider.currentUser(queue: DispatchQueue.global(qos: .background), handler: {

@@ -64,7 +64,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 self.posts = sortedPosts
                 findPostsGroup.leave()
             } else {
-                print("Posts are not found")
+                self.present(AlertController.getAlert(), animated: true, completion: nil)
+                self.posts = [Post]()
             }
         })
         findPostsGroup.wait()
@@ -280,8 +281,10 @@ extension ProfileCollectionViewController {
                 userProvider.usersFollowedByUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                     usersFound in
                     
-                    for user in usersFound! {
-                        users.append(user)
+                    if usersFound != nil {
+                        for user in usersFound! {
+                            users.append(user)
+                        }
                     }
                     
                     prepareGroup.leave()
@@ -294,8 +297,10 @@ extension ProfileCollectionViewController {
                 userProvider.usersFollowingUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
                     usersFound in
                     
-                    for user in usersFound! {
-                        users.append(user)
+                    if usersFound != nil {
+                        for user in usersFound! {
+                            users.append(user)
+                        }
                     }
                     
                     prepareGroup.leave()

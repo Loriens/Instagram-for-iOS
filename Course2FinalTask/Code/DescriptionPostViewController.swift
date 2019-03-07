@@ -42,8 +42,8 @@ extension DescriptionPostViewController {
             if post != nil {
                 shareGroup.leave()
             } else {
-                print("Post was not shared")
-                fatalError()
+                self.present(AlertController.getAlert(), animated: true, completion: nil)
+                shareGroup.leave()
             }
         })
         
