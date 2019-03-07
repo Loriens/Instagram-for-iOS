@@ -24,6 +24,7 @@
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
 		86CF406B21B6BC68007C0FAE /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */; };
 		86CF6B462222C3580035084C /* NewPostCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */; };
+		86E512C4223172A100E0BCDC /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E512C3223172A100E0BCDC /* Spinner.swift */; };
 		86F0ADAE2225232A0048A929 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */; };
 		86F0ADAF2225232A0048A929 /* FilterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */; };
 		86F911B321B5B0BF004E38D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F911B221B5B0BF004E38D0 /* Main.storyboard */; };
@@ -64,6 +65,7 @@
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCollectionViewController.swift; sourceTree = "<group>"; };
+		86E512C3223172A100E0BCDC /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCollectionViewCell.xib; sourceTree = "<group>"; };
 		86F911B221B5B0BF004E38D0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */,
 				86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */,
 				867B0CA8221ED79E001C5E9B /* CustomActivityIndicator.swift */,
+				86E512C3223172A100E0BCDC /* Spinner.swift */,
 				86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */,
 				86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */,
 				8687E59221B8243E00A403AB /* UsersListTableViewController.swift */,
@@ -232,6 +235,7 @@
 				86CF6B462222C3580035084C /* NewPostCollectionViewController.swift in Sources */,
 				8687E59521B938D400A403AB /* DataUIButton.swift in Sources */,
 				866D0C8C22271C6B00612E33 /* DescriptionPostViewController.swift in Sources */,
+				86E512C4223172A100E0BCDC /* Spinner.swift in Sources */,
 				86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */,
 				86F0ADAE2225232A0048A929 /* FilterCollectionViewCell.swift in Sources */,
 				8674BE7D2224658B009DFD4E /* FilterViewController.swift in Sources */,

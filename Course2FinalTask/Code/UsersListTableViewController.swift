@@ -76,11 +76,11 @@ class UsersListTableViewController: UITableViewController {
         }
         sender.userID = users[indexPath.item]
         
-        indicator?.startAnimating()
+        Spinner.start()
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUserProfileFromUsersList", sender: sender)
-            self.indicator?.stopAnimating()
+            Spinner.stop()
         }
     }
     

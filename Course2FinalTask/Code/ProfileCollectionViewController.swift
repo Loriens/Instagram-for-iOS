@@ -26,9 +26,9 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.tabBarController?.view {
-            indicator = CustomActivityIndicator(view: view)
-        }
+//        if let view = self.tabBarController?.view {
+//            indicator = CustomActivityIndicator(view: view)
+//        }
 
         // Определяем страницу пользователя, которую нужно отобразить
         if let user = currentUser {
@@ -227,20 +227,20 @@ extension ProfileCollectionViewController {
     }
     
     @objc func followersButtonPressed(_ sender: DataUIButton) {
-        indicator?.startAnimating()
+        Spinner.start()
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
-            self.indicator?.stopAnimating()
+            Spinner.stop()
         }
     }
     
     @objc func followingButtonPressed(_ sender: DataUIButton) {
-        indicator?.startAnimating()
+        Spinner.start()
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
-            self.indicator?.stopAnimating()
+            Spinner.stop()
         }
     }
     

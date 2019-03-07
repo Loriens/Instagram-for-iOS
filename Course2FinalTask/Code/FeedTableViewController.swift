@@ -17,9 +17,9 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = tabBarController?.view {
-            indicator = CustomActivityIndicator(view: view)
-        }
+//        if let view = tabBarController?.view {
+//            indicator = CustomActivityIndicator(view: view)
+//        }
         
         let feedGroup = DispatchGroup()
         feedGroup.enter()
@@ -103,11 +103,11 @@ class FeedTableViewController: UITableViewController {
     }
     
     @objc func authorButtonPressed(_ sender: DataUIButton) {
-        indicator?.startAnimating()
+        Spinner.start()
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
-            self.indicator?.stopAnimating()
+            Spinner.stop()
         }
     }
     
@@ -175,21 +175,21 @@ class FeedTableViewController: UITableViewController {
         let point = sender.location(in: view)
         
         if view.avatarImage.frame.contains(point) {
-            indicator?.startAnimating()
+            Spinner.start()
             
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: view.author)
-                self.indicator?.stopAnimating()
+                Spinner.stop()
             }
         }
     }
     
     @objc func likesButtonPressed(_ sender: DataUIButton) {
-        indicator?.startAnimating()
+        Spinner.start()
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showLikes", sender: sender)
-            self.indicator?.stopAnimating()
+            Spinner.stop()
         }
     }
     

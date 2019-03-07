@@ -89,7 +89,7 @@ extension FilterViewController {
     
     @objc func tappedCell(_ sender: UITapGestureRecognizer) {
         
-//        indicator?.startAnimating()
+//        Spinner.start()
         
         guard let view = sender.view as? FilterCollectionViewCell else {
             return
@@ -111,7 +111,7 @@ extension FilterViewController {
         filterGroup.wait()
         DispatchQueue.main.async {
             self.mainImage.image = resultImage
-//            self.indicator?.stopAnimating()
+//            Spinner.stop()
         }
     }
     
