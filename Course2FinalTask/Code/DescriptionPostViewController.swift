@@ -33,6 +33,7 @@ class DescriptionPostViewController: UIViewController {
 extension DescriptionPostViewController {
     
     @objc func barItemSharePressed(_ sender: Any?) {
+        Spinner.start()
         let shareGroup = DispatchGroup()
         
         shareGroup.enter()

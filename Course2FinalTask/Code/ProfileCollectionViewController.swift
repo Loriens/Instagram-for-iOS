@@ -231,7 +231,6 @@ extension ProfileCollectionViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
-            Spinner.stop()
         }
     }
     
@@ -240,7 +239,6 @@ extension ProfileCollectionViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUsersListFromProfile", sender: sender)
-            Spinner.stop()
         }
     }
     
@@ -288,6 +286,10 @@ extension ProfileCollectionViewController {
                     }
                     
                     prepareGroup.leave()
+                    
+                    DispatchQueue.main.async {
+                        Spinner.stop()
+                    }
                 })
             } else {
                 userProvider.usersFollowingUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
@@ -298,6 +300,10 @@ extension ProfileCollectionViewController {
                     }
                     
                     prepareGroup.leave()
+                    
+                    DispatchQueue.main.async {
+                        Spinner.stop()
+                    }
                 })
             }
             

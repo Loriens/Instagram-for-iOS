@@ -32,7 +32,10 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
     
     //  Функция вызывается после публикации фото
     @IBAction func unwintToNewPostVC(segue: UIStoryboardSegue) {
+        Spinner.stop()
+        
         tabBarController?.selectedIndex = 0
+        
     }
  
 

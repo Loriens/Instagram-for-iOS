@@ -89,7 +89,7 @@ extension FilterViewController {
     
     @objc func tappedCell(_ sender: UITapGestureRecognizer) {
         
-//        Spinner.start()
+        Spinner.start()
         
         guard let view = sender.view as? FilterCollectionViewCell else {
             return
@@ -105,14 +105,16 @@ extension FilterViewController {
             if let ciimage = CIImage(image: self.tempImage!) {
                 resultImage = self.filter.applyFilter(name: nameFilter, params: [kCIInputImageKey: ciimage])
                 filterGroup.leave()
+                
+                DispatchQueue.main.async {
+                    Spinner.stop()
+                }
             }
         }
         
         filterGroup.wait()
-        DispatchQueue.main.async {
-            self.mainImage.image = resultImage
-//            Spinner.stop()
-        }
+        
+        self.mainImage.image = resultImage
     }
     
     @objc func barItemNextPressed(_ sender: Any?) {
