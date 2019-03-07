@@ -110,6 +110,7 @@ extension FilterViewController {
     
     @objc func tappedCell(_ sender: UITapGestureRecognizer) {
         
+        // Spinner does not work
         Spinner.start()
         
         guard let view = sender.view as? FilterCollectionViewCell else {
