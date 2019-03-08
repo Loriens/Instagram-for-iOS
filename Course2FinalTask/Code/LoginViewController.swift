@@ -19,6 +19,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    /// Функция вызывается после выхода из профиля
+    @IBAction func unwindToLoginVC(segue: UIStoryboardSegue) {
+        // do something
+        
+    }
 
     @IBAction func signInPressed(_ sender: Any) {
         let (token, _) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)

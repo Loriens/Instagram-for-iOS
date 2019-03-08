@@ -17,7 +17,7 @@ class ServerQuery {
     
     /// Server's URL
     private static let host = "http://localhost:8080"
-    static var token: String? = nil
+    private static var token: String? = nil
     /// httpResponse.statusCode from server
     private static var serverResponse: Int? = nil
     

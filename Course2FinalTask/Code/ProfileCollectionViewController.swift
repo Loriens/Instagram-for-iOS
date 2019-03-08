@@ -76,6 +76,9 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // Register cell classes
         collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView!.register(UINib.init(nibName: "ProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        
+        let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(barItemLogOutPressed(_:)))
+        self.navigationItem.rightBarButtonItem = logOutButton
 
         // Do any additional setup after loading the view.
     }
@@ -213,7 +216,16 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
 extension ProfileCollectionViewController {
     
-    // Добавляет переходы по кнопкам и действия по жестам
+    /// Выполняет выход из профиля
+    @objc func barItemLogOutPressed(_ sender: Any?) {
+        if ServerQuery.signOut() == 200 {
+            performSegue(withIdentifier: "unwindtoLoginVC", sender: self)
+        } else {
+            print("can't sign out")
+        }
+    }
+    
+    /// Добавляет переходы по кнопкам и действия по жестам
     func addActions(_ user: User, _ headerView: ProfileHeaderCollectionReusableView) {
         headerView.followers.addTarget(self, action: #selector(followersButtonPressed(_:)), for: .touchUpInside)
         headerView.following.addTarget(self, action: #selector(followingButtonPressed(_:)), for: .touchUpInside)

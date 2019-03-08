@@ -30,7 +30,7 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
         // Do any additional setup after loading the view.
     }
     
-    //  Функция вызывается после публикации фото
+    ///  Функция вызывается после публикации фото
     @IBAction func unwintToNewPostVC(segue: UIStoryboardSegue) {
         Spinner.stop()
         

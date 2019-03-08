@@ -167,6 +167,7 @@
                     <navigationItem key="navigationItem" id="jvs-dT-he1"/>
                     <connections>
                         <segue destination="S0b-MP-coe" kind="show" identifier="showUsersListFromProfile" id="H4r-4V-MLX"/>
+                        <segue destination="dDe-eP-qpH" kind="unwind" identifier="unwindtoLoginVC" unwindAction="unwindToLoginVCWithSegue:" id="XMq-lF-qY4"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6Y-2r-T92" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -458,6 +459,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVJ-OQ-wIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dDe-eP-qpH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>
