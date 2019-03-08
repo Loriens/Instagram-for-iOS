@@ -27,7 +27,9 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func signInPressed(_ sender: Any) {
+        print(ServerQuery.checktoken())
         let (token, _) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)
+        print(ServerQuery.checktoken())
         
         guard token != nil else {
             print("token is empty")

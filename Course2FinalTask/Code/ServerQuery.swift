@@ -106,13 +106,11 @@ class ServerQuery {
         
         
         let defaultHeaders = [
-            "Content-Type" : "application/json",
             "token" : token
         ]
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = defaultHeaders
         request.httpMethod = "POST"
-//        request.addValue(token, forHTTPHeaderField: "token")
         
         let taskGroup = DispatchGroup()
         taskGroup.enter()
@@ -138,8 +136,62 @@ class ServerQuery {
         }
         dataTask.resume()
         taskGroup.wait()
-        print("sign out")
+        
         return self.serverResponse
+    }
+    
+    /**
+     - Returns: true if token is valid.
+     */
+    static func checktoken() -> Bool {
+        self.serverResponse = nil
+
+        guard let token = self.token else {
+            print("user did not sign in")
+            return false
+        }
+
+        guard let url = URL(string: host + "/checkToken/") else {
+            print("url is empty")
+            return false
+        }
+
+
+        let defaultHeaders = [
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+
+            if let error = error {
+                print(error.localizedDescription)
+            }
+
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                } else {
+                    taskGroup.leave()
+                }
+            }
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        if serverResponse == 200 {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
