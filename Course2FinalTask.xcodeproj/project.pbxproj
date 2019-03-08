@@ -22,6 +22,7 @@
 		86B84986222581070050E8CA /* NewPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */; };
 		86C97F3B22324D6700D99DD5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C97F3A22324D6700D99DD5 /* Kingfisher.framework */; };
 		86C97F3E22326AFA00D99DD5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */; };
+		86C97F402232724900D99DD5 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C97F3F2232724900D99DD5 /* Account.swift */; };
 		86CF406521B6AA0D007C0FAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */; };
 		86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */; };
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
@@ -66,6 +67,7 @@
 		86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		86C97F3A22324D6700D99DD5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		86C97F3F2232724900D99DD5 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
 				86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */,
+				86C97F3F2232724900D99DD5 /* Account.swift */,
 				866D0C8B22271C6B00612E33 /* DescriptionPostViewController.swift */,
 				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
 				86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */,
@@ -277,6 +280,7 @@
 				8687E59521B938D400A403AB /* DataUIButton.swift in Sources */,
 				866D0C8C22271C6B00612E33 /* DescriptionPostViewController.swift in Sources */,
 				86E512C4223172A100E0BCDC /* Spinner.swift in Sources */,
+				86C97F402232724900D99DD5 /* Account.swift in Sources */,
 				86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */,
 				86F0ADAE2225232A0048A929 /* FilterCollectionViewCell.swift in Sources */,
 				8674BE7D2224658B009DFD4E /* FilterViewController.swift in Sources */,
