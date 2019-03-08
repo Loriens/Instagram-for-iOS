@@ -143,7 +143,7 @@ class ServerQuery {
     /**
      - Returns: true if token is valid.
      */
-    static func checktoken() -> Bool {
+    static func checkToken() -> Bool {
         self.serverResponse = nil
 
         guard let token = self.token else {
