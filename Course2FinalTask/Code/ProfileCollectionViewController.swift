@@ -43,7 +43,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 
                 self.currentUser = user
                 DispatchQueue.main.async {
-                    self.title = user?.username
+                    self.navigationItem.title = user?.username
                 }
                 
                 currentUserGroup.leave()
