@@ -91,7 +91,7 @@ class ServerQuery {
     /**
      - Returns: status code of server's response (status code 200 means that user signed out). The function returning nil means token was nil.
      */
-    static func signOut(token: String) -> (Int?) {
+    static func signOut() -> (Int?) {
         serverResponse = nil
         
         guard let token = self.token else {
