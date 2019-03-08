@@ -67,7 +67,9 @@ class LoginViewController: UIViewController {
                         return
                 }
                 
-                print(token)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showLogIn", sender: self)
+                }
             }
         }
         

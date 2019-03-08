@@ -454,6 +454,7 @@
                     <connections>
                         <outlet property="loginField" destination="odF-0P-Obb" id="9yt-yw-JWI"/>
                         <outlet property="passwordField" destination="6HE-QD-Wki" id="bp3-CK-7II"/>
+                        <segue destination="gsB-f6-qQj" kind="show" identifier="showLogIn" id="Qap-sa-hBg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVJ-OQ-wIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
