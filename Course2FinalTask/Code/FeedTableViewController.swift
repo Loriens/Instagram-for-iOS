@@ -180,7 +180,6 @@ class FeedTableViewController: UITableViewController {
         let point = sender.location(in: view)
         
         if view.avatarImage.frame.contains(point) {
-            // Spinner does not work
             Spinner.start()
             
             DispatchQueue.main.async {
