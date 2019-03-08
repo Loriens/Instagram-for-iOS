@@ -112,6 +112,7 @@ class FeedTableViewController: UITableViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: sender)
+            Spinner.stop()
         }
     }
     
@@ -184,6 +185,7 @@ class FeedTableViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "showAuthorProfileFromFeed", sender: view.author)
+                Spinner.stop()
             }
         }
     }
@@ -193,6 +195,7 @@ class FeedTableViewController: UITableViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showLikes", sender: sender)
+            Spinner.stop()
         }
     }
     
@@ -223,10 +226,6 @@ class FeedTableViewController: UITableViewController {
                 }
                 
                 prepareGroup.leave()
-                
-                DispatchQueue.main.async {
-                    Spinner.stop()
-                }
             })
         }
         
@@ -241,10 +240,6 @@ class FeedTableViewController: UITableViewController {
                 }
                 
                 prepareGroup.leave()
-                
-                DispatchQueue.main.async {
-                    Spinner.stop()
-                }
             })
         }
         

@@ -80,6 +80,7 @@ class UsersListTableViewController: UITableViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showUserProfileFromUsersList", sender: sender)
+            Spinner.stop()
         }
     }
     
@@ -97,10 +98,6 @@ class UsersListTableViewController: UITableViewController {
                 user in
                 destination.currentUser = user
                 userGroup.leave()
-                
-                DispatchQueue.main.async {
-                    Spinner.stop()
-                }
             })
             
             userGroup.wait()
