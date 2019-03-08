@@ -21,6 +21,7 @@
 		86B3EFA522318D01009BDE6D /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3EFA422318D00009BDE6D /* AlertController.swift */; };
 		86B84986222581070050E8CA /* NewPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */; };
 		86C97F3B22324D6700D99DD5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C97F3A22324D6700D99DD5 /* Kingfisher.framework */; };
+		86C97F3E22326AFA00D99DD5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */; };
 		86CF406521B6AA0D007C0FAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */; };
 		86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */; };
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
@@ -64,6 +65,7 @@
 		86B3EFA422318D00009BDE6D /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		86C97F3A22324D6700D99DD5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				86B3EFA422318D00009BDE6D /* AlertController.swift */,
 				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
 				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
+				86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */,
 				866D0C8B22271C6B00612E33 /* DescriptionPostViewController.swift */,
 				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
 				86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */,
@@ -282,6 +285,7 @@
 				8687E59321B8243E00A403AB /* UsersListTableViewController.swift in Sources */,
 				867B0CA9221ED79E001C5E9B /* CustomActivityIndicator.swift in Sources */,
 				86B3EFA522318D01009BDE6D /* AlertController.swift in Sources */,
+				86C97F3E22326AFA00D99DD5 /* LoginViewController.swift in Sources */,
 				86228D28222569A1004E9D2C /* ImageFilter.swift in Sources */,
 				8687E59A21B95C0300A403AB /* ProfileCollectionViewController.swift in Sources */,
 				86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */,
