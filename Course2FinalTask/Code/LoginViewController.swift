@@ -14,10 +14,6 @@ class LoginViewController: UIViewController {
     
     private let defaultLogin: String = "user"
     private let defaultPassword: String = "qwerty"
-    private let hostURL = "http://localhost:8080"
-    private let defaultHeaders = [
-        "Content-Type" : "application/json"
-    ]
     
     
     override func viewDidLoad() {

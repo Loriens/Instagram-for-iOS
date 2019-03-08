@@ -16,8 +16,8 @@ import Foundation
 class ServerQuery {
     
     /// Server's URL
-    private static let hostURL = "http://localhost:8080"
-    private static var token: String? = nil
+    private static let host = "http://localhost:8080"
+    static var token: String? = nil
     /// httpResponse.statusCode from server
     private static var serverResponse: Int? = nil
     
@@ -25,7 +25,9 @@ class ServerQuery {
      - Returns: The function returns tuple (auth token, httpResponse.statusCode). If statusCode != 200 or login/password are invalid, auth token is nil.
      */
     static func signIn(login: String, password: String) -> (String?, Int?) {
-        guard let url = URL(string: hostURL + "/signin/") else {
+        serverResponse = nil
+        
+        guard let url = URL(string: host + "/signin/") else {
             print("url is empty")
             return (nil, nil)
         }
@@ -84,6 +86,60 @@ class ServerQuery {
         taskGroup.wait()
         
         return (token, serverResponse)
+    }
+    
+    /**
+     - Returns: status code of server's response (status code 200 means that user signed out). The function returning nil means token was nil.
+     */
+    static func signOut(token: String) -> (Int?) {
+        serverResponse = nil
+        
+        guard let token = self.token else {
+            print("user did not sign in")
+            return nil
+        }
+        
+        guard let url = URL(string: host + "/signout/") else {
+            print("url is empty")
+            return nil
+        }
+        
+        
+        let defaultHeaders = [
+            "Content-Type" : "application/json",
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        request.httpMethod = "POST"
+//        request.addValue(token, forHTTPHeaderField: "token")
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                } else {
+                    self.token = nil
+                    taskGroup.leave()
+                }
+            }
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        print("sign out")
+        return self.serverResponse
     }
     
 }
