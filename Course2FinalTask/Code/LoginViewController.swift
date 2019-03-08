@@ -25,56 +25,14 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func signInPressed(_ sender: Any) {
-        guard let url = URL(string: hostURL + "/signin/") else {
-            print("url is empty")
+        let (token, _) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)
+        
+        guard token != nil else {
+            print("token is empty")
             return
         }
         
-        let encoder = JSONEncoder()
-        let account = Account(login: defaultLogin, password: defaultPassword)
-        let accountData = try? encoder.encode(account)
-        
-        
-        var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = defaultHeaders
-        request.httpMethod = "POST"
-        request.httpBody = accountData
-        
-        let dataTask = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode != 200 {
-                    print("error, HTTP status code: \(httpResponse.statusCode)")
-                    return
-                }
-            }
-            
-            guard let data = data else {
-                print("no data received")
-                return
-            }
-            
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                // Достаём токен
-                guard let token = json!["token"] as? String else {
-                        print("token is not found")
-                        return
-                }
-                
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "showLogIn", sender: self)
-                }
-            }
-        }
-        
-        dataTask.resume()
-        
+        performSegue(withIdentifier: "showLogIn", sender: self)
     }
     
 }
