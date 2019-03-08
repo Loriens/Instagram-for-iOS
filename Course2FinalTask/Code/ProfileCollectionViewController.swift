@@ -49,6 +49,9 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 currentUserGroup.leave()
             })
             currentUserGroup.wait()
+            
+            let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(barItemLogOutPressed(_:)))
+            self.navigationItem.rightBarButtonItem = logOutButton
         }
         
         // Загружаем публикации пользователя
@@ -76,9 +79,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // Register cell classes
         collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView!.register(UINib.init(nibName: "ProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
-        
-        let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(barItemLogOutPressed(_:)))
-        self.navigationItem.rightBarButtonItem = logOutButton
 
         // Do any additional setup after loading the view.
     }
