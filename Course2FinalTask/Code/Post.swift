@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Post: Codable {
+struct PostCodable: Codable {
     var id: String
     var authorID: String
     var description: String
