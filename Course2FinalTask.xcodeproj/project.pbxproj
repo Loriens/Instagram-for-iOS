@@ -20,6 +20,7 @@
 		8687E59A21B95C0300A403AB /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */; };
 		86B3EFA522318D01009BDE6D /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3EFA422318D00009BDE6D /* AlertController.swift */; };
 		86B84986222581070050E8CA /* NewPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */; };
+		86C97F3B22324D6700D99DD5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C97F3A22324D6700D99DD5 /* Kingfisher.framework */; };
 		86CF406521B6AA0D007C0FAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */; };
 		86CF406721B6AB28007C0FAE /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */; };
 		86CF406A21B6BC67007C0FAE /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		86B3EFA422318D00009BDE6D /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCollectionViewCell.swift; sourceTree = "<group>"; };
+		86C97F3A22324D6700D99DD5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C97F3B22324D6700D99DD5 /* Kingfisher.framework in Frameworks */,
 				7484B05420441FD000BDE1A6 /* DataProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +96,7 @@
 				74B79256202B3254006BCB41 /* Course2FinalTask */,
 				7484B05320441FD000BDE1A6 /* DataProvider.framework */,
 				74B79255202B3254006BCB41 /* Products */,
+				86C97F3922324D6600D99DD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,6 +162,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		86C97F3922324D6600D99DD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86C97F3A22324D6700D99DD5 /* Kingfisher.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,6 +181,7 @@
 				74B79251202B3254006BCB41 /* Frameworks */,
 				74B79252202B3254006BCB41 /* Resources */,
 				74B7927A202B33EA006BCB41 /* Embed Frameworks */,
+				86C97F3C22324D8800D99DD5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -228,6 +241,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		86C97F3C22324D8800D99DD5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		74B79250202B3254006BCB41 /* Sources */ = {
@@ -375,6 +410,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Course2FinalTask/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -398,6 +434,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Course2FinalTask/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
