@@ -34,6 +34,8 @@ class LoginViewController: UIViewController {
             return
         }
         
+        print(ServerQuery.feed())
+        
         performSegue(withIdentifier: "showLogIn", sender: self)
     }
     
