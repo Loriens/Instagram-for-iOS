@@ -34,8 +34,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-//        print(ServerQuery.unlike(postId: "27"))
-//        print(ServerQuery.unlike(postId: "10000"))
+//        print(ServerQuery.postLikes(postId: "38"))
         
         performSegue(withIdentifier: "showLogIn", sender: self)
     }

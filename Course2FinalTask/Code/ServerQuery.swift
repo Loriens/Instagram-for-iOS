@@ -832,4 +832,66 @@ class ServerQuery {
         return success
     }
     
+    /**
+     - Returns: Users who likes the post. If returns nil, the post was not found.
+     */
+    static func postLikes(postId id: String) -> [UserCodable]? {
+        var users: [UserCodable]? = [UserCodable]()
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return users
+        }
+        
+        guard let url = URL(string: host + "/posts/" + id + "/likes") else {
+            print("url is empty")
+            return users
+        }
+        
+        let defaultHeaders = [
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                }
+            }
+            
+            guard let data = data else {
+                print("no data received")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            guard let tempUsers = try? decoder.decode([UserCodable].self, from: data) else {
+                print("can't decode posts")
+                taskGroup.leave()
+                return
+            }
+            
+            users = tempUsers
+            taskGroup.leave()
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return users
+    }
+    
 }
