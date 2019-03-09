@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-//        print(ServerQuery.userPosts(id: "1"))
+//        print(ServerQuery.post(postId: "38"))
         
         performSegue(withIdentifier: "showLogIn", sender: self)
     }
