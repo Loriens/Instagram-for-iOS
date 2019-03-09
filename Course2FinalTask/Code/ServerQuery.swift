@@ -720,4 +720,116 @@ class ServerQuery {
         return post
     }
     
+    /**
+     - Returns: If the answer is true the current user likes post.
+     */
+    static func like(postId: String) -> Bool {
+        var success = false
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return success
+        }
+        
+        guard let url = URL(string: host + "/posts/like") else {
+            print("url is empty")
+            return success
+        }
+        
+        let jsonId = [ "postID" : postId]
+        let idData = try? JSONSerialization.data(withJSONObject: jsonId, options: [])
+        
+        let defaultHeaders = [
+            "Content-Type" : "application/json",
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        request.httpMethod = "POST"
+        request.httpBody = idData
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                }
+                taskGroup.leave()
+            }
+            
+            success = true
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return success
+    }
+    
+    /**
+     - Returns: If the answer is true the current user unlikes post.
+     */
+    static func unlike(postId: String) -> Bool {
+        var success = false
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return success
+        }
+        
+        guard let url = URL(string: host + "/posts/unlike") else {
+            print("url is empty")
+            return success
+        }
+        
+        let jsonId = [ "postID" : postId]
+        let idData = try? JSONSerialization.data(withJSONObject: jsonId, options: [])
+        
+        let defaultHeaders = [
+            "Content-Type" : "application/json",
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        request.httpMethod = "POST"
+        request.httpBody = idData
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                }
+                taskGroup.leave()
+            }
+            
+            success = true
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return success
+    }
+    
 }
