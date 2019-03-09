@@ -194,9 +194,9 @@ class ServerQuery {
         }
     }
     
-    static func currentUser() -> UserCodable? {
+    static func currentUser() -> User? {
         self.serverResponse = nil
-        var currentUser: UserCodable?
+        var currentUser: User?
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -239,7 +239,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            currentUser = try? decoder.decode(UserCodable.self, from: data)
+            currentUser = try? decoder.decode(User.self, from: data)
             taskGroup.leave()
         }
         dataTask.resume()
@@ -251,9 +251,9 @@ class ServerQuery {
     /**
      - Returns: tuple (User, httpResponse.statusCode).
      */
-    static func user(id: String) -> (UserCodable?, Int?) {
+    static func user(id: String) -> (User?, Int?) {
         self.serverResponse = nil
-        var user: UserCodable?
+        var user: User?
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -296,7 +296,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            user = try? decoder.decode(UserCodable.self, from: data)
+            user = try? decoder.decode(User.self, from: data)
             taskGroup.leave()
         }
         dataTask.resume()
@@ -429,8 +429,8 @@ class ServerQuery {
     /**
      - Returns: If returns nil, the user was not found.
      */
-    static func followers(id: String) -> [UserCodable]? {
-        var users: [UserCodable]? = [UserCodable]()
+    static func followers(id: String) -> [User]? {
+        var users: [User]? = [User]()
 
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -474,7 +474,7 @@ class ServerQuery {
             }
 
             let decoder = JSONDecoder()
-            users = try? decoder.decode([UserCodable].self, from: data)
+            users = try? decoder.decode([User].self, from: data)
             taskGroup.leave()
         }
         dataTask.resume()
@@ -486,8 +486,8 @@ class ServerQuery {
     /**
      - Returns: If returns nil, the user was not found.
      */
-    static func following(id: String) -> [UserCodable]? {
-        var users: [UserCodable]? = [UserCodable]()
+    static func following(id: String) -> [User]? {
+        var users: [User]? = [User]()
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -531,7 +531,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            users = try? decoder.decode([UserCodable].self, from: data)
+            users = try? decoder.decode([User].self, from: data)
             taskGroup.leave()
         }
         dataTask.resume()
@@ -543,8 +543,8 @@ class ServerQuery {
     /**
      - Returns: If returns nil, the user was not found.
      */
-    static func userPosts(id: String) -> [PostCodable]? {
-        var posts: [PostCodable]? = [PostCodable]()
+    static func userPosts(id: String) -> [Post]? {
+        var posts: [Post]? = [Post]()
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -587,7 +587,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            guard let tempPosts = try? decoder.decode([PostCodable].self, from: data) else {
+            guard let tempPosts = try? decoder.decode([Post].self, from: data) else {
                 print("can't decode posts")
                 taskGroup.leave()
                 return
@@ -602,8 +602,8 @@ class ServerQuery {
         return posts
     }
     
-    static func feed() -> [PostCodable] {
-        var posts: [PostCodable] = [PostCodable]()
+    static func feed() -> [Post] {
+        var posts: [Post] = [Post]()
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -646,7 +646,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            guard let tempPosts = try? decoder.decode([PostCodable].self, from: data) else {
+            guard let tempPosts = try? decoder.decode([Post].self, from: data) else {
                 print("can't decode posts")
                 taskGroup.leave()
                 return
@@ -661,8 +661,8 @@ class ServerQuery {
         return posts
     }
     
-    static func post(postId: String) -> PostCodable? {
-        var post: PostCodable? = nil
+    static func post(postId: String) -> Post? {
+        var post: Post? = nil
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -705,7 +705,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            guard let tempPost = try? decoder.decode(PostCodable.self, from: data) else {
+            guard let tempPost = try? decoder.decode(Post.self, from: data) else {
                 print("can't decode posts")
                 taskGroup.leave()
                 return
@@ -835,8 +835,8 @@ class ServerQuery {
     /**
      - Returns: Users who likes the post. If returns nil, the post was not found.
      */
-    static func postLikes(postId id: String) -> [UserCodable]? {
-        var users: [UserCodable]? = [UserCodable]()
+    static func postLikes(postId id: String) -> [User]? {
+        var users: [User]? = [User]()
         
         guard let token = self.token else {
             print("user did not sign in, token is nil")
@@ -879,7 +879,7 @@ class ServerQuery {
             }
             
             let decoder = JSONDecoder()
-            guard let tempUsers = try? decoder.decode([UserCodable].self, from: data) else {
+            guard let tempUsers = try? decoder.decode([User].self, from: data) else {
                 print("can't decode posts")
                 taskGroup.leave()
                 return
