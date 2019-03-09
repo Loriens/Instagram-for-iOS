@@ -305,4 +305,126 @@ class ServerQuery {
         return (user, serverResponse)
     }
     
+    /**
+     - Returns: tuple (success, httpResponse.statusCode). If success is true the current user successfully follows user
+     */
+    static func follow(id: String) -> (Bool, Int?) {
+        serverResponse = nil
+        var success = false
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return (success, serverResponse)
+        }
+        
+        guard let url = URL(string: host + "/users/follow") else {
+            print("url is empty")
+            return (success, serverResponse)
+        }
+        
+        let jsonId = [ "userID" : id]
+        let idData = try? JSONSerialization.data(withJSONObject: jsonId, options: [])
+        
+        
+        let defaultHeaders = [
+            "Content-Type" : "application/json",
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        request.httpMethod = "POST"
+        request.httpBody = idData
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                }
+                
+                
+                taskGroup.leave()
+
+            }
+            
+            success = true
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return (success, serverResponse)
+    }
+    
+    /**
+     - Returns: tuple (success, httpResponse.statusCode). If success is true the current user successfully unfollows user
+     */
+    static func unfollow(id: String) -> (Bool, Int?) {
+        serverResponse = nil
+        var success = false
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return (success, serverResponse)
+        }
+        
+        guard let url = URL(string: host + "/users/unfollow") else {
+            print("url is empty")
+            return (success, serverResponse)
+        }
+        
+        let jsonId = [ "userID" : id]
+        let idData = try? JSONSerialization.data(withJSONObject: jsonId, options: [])
+        
+        
+        let defaultHeaders = [
+            "Content-Type" : "application/json",
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        request.httpMethod = "POST"
+        request.httpBody = idData
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    taskGroup.leave()
+                    return
+                }
+                
+                
+                taskGroup.leave()
+                
+            }
+            
+            success = true
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return (success, serverResponse)
+    }
+    
 }
