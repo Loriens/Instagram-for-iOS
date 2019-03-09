@@ -14,7 +14,7 @@ struct UserCodable: Codable {
     var fullName: String
     var avatar: String
     var currentUserFollowsThisUser: Bool
-    var currentUserIsFollowedByThisIsUser: Bool
+    var currentUserIsFollowedByThisUser: Bool
     var followsCount: Int
     var followedByCount: Int
 }
