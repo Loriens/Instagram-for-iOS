@@ -9,8 +9,8 @@
 import Foundation
 
 /**
- Класс отвечает за запросы к серверу.
- Названия запросов соответствуют методам класса.
+ Class provides server requests on the host "http://localhost:8080".
+ Enter "./Run" in the terminal to start the server.
  */
 
 class ServerQuery {
@@ -325,7 +325,6 @@ class ServerQuery {
         let jsonId = [ "userID" : id]
         let idData = try? JSONSerialization.data(withJSONObject: jsonId, options: [])
         
-        
         let defaultHeaders = [
             "Content-Type" : "application/json",
             "token" : token
@@ -425,6 +424,120 @@ class ServerQuery {
         taskGroup.wait()
         
         return (success, serverResponse)
+    }
+    
+    /**
+     - Returns: If return is nil, the user was not found.
+     */
+    static func followers(id: String) -> [UserCodable]? {
+        var users: [UserCodable]? = [UserCodable]()
+
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return users
+        }
+
+        guard let url = URL(string: host + "/users/" + id + "/followers") else {
+            print("url is empty")
+            return users
+        }
+
+        let defaultHeaders = [
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+
+            if let error = error {
+                print(error.localizedDescription)
+            }
+
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    users = nil
+                    taskGroup.leave()
+                    return
+                }
+            }
+
+            guard let data = data else {
+                print("no data received")
+                return
+            }
+
+            let decoder = JSONDecoder()
+            users = try? decoder.decode([UserCodable].self, from: data)
+            taskGroup.leave()
+        }
+        dataTask.resume()
+        taskGroup.wait()
+
+        return users
+    }
+    
+    /**
+     - Returns: If return is nil, the user was not found.
+     */
+    static func following(id: String) -> [UserCodable]? {
+        var users: [UserCodable]? = [UserCodable]()
+        
+        guard let token = self.token else {
+            print("user did not sign in, token is nil")
+            return users
+        }
+        
+        guard let url = URL(string: host + "/users/" + id + "/followers") else {
+            print("url is empty")
+            return users
+        }
+        
+        let defaultHeaders = [
+            "token" : token
+        ]
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = defaultHeaders
+        
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        let dataTask = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                self.serverResponse = httpResponse.statusCode
+                
+                if httpResponse.statusCode != 200 {
+                    print("error, HTTP status code: \(httpResponse.statusCode)")
+                    users = nil
+                    taskGroup.leave()
+                    return
+                }
+            }
+            
+            guard let data = data else {
+                print("no data received")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            users = try? decoder.decode([UserCodable].self, from: data)
+            taskGroup.leave()
+        }
+        dataTask.resume()
+        taskGroup.wait()
+        
+        return users
     }
     
 }
