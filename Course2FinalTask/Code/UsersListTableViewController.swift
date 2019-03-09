@@ -7,20 +7,15 @@
 //
 
 import UIKit
-import DataProvider
+import Kingfisher
 
 class UsersListTableViewController: UITableViewController {
     
-    var users: [User.Identifier]?
-    var userProvider = DataProviders.shared.usersDataProvider
+    var users: [User]?
     var indicator: CustomActivityIndicator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let view = self.tabBarController?.view {
-            indicator = CustomActivityIndicator(view: view)
-        }
 
         self.navigationController?.navigationItem.hidesBackButton = false
         
@@ -45,21 +40,8 @@ class UsersListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "UserCell")!
         
-        let userGroup = DispatchGroup()
-        
-        userGroup.enter()
-        
-        userProvider.user(with: users![indexPath.item], queue: DispatchQueue.global(qos: .userInteractive), handler: {
-            user in
-            DispatchQueue.main.async {
-                cell.textLabel?.text = user!.username
-                cell.imageView?.image = user!.avatar
-            }
-            
-            userGroup.leave()
-        })
-        
-        userGroup.wait()
+        cell.textLabel?.text = users![indexPath.item].username
+        cell.imageView?.kf.setImage(with: URL(string: users![indexPath.item].avatar))
         
         return cell
     }
@@ -74,7 +56,7 @@ class UsersListTableViewController: UITableViewController {
         guard let users = users else {
             return
         }
-        sender.userID = users[indexPath.item]
+        sender.userID = users[indexPath.item].id
         
         Spinner.start()
         
@@ -90,17 +72,7 @@ class UsersListTableViewController: UITableViewController {
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
-            let userGroup = DispatchGroup()
-            
-            userGroup.enter()
-            
-            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                user in
-                destination.currentUser = user
-                userGroup.leave()
-            })
-            
-            userGroup.wait()
+            (destination.currentUser, _) = ServerQuery.user(id: dataButton.userID!)
         }
     }
 

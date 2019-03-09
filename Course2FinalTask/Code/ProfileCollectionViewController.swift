@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import DataProvider
+import Kingfisher
 
 private let reuseIdentifier = "CollectionCell"
 private let headerReuseIdentifier = "ProfileHeader"
 
 class ProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let dataProvider = DataProviders.shared.postsDataProvider
-    let userProvider = DataProviders.shared.usersDataProvider
     // Пользователь просматриваемой страницы
     var currentUser: User?
     // true, если страница владельца аккаунта
@@ -25,10 +23,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if let view = self.tabBarController?.view {
-//            indicator = CustomActivityIndicator(view: view)
-//        }
 
         // Определяем страницу пользователя, которую нужно отобразить
         if let user = currentUser {
@@ -36,45 +30,23 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         } else {
             isBaseProfile = true
             
-            let currentUserGroup = DispatchGroup()
-            currentUserGroup.enter()
-            userProvider.currentUser(queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                user in
-                
-                self.currentUser = user
-                DispatchQueue.main.async {
-                    self.navigationItem.title = user?.username
-                }
-                
-                currentUserGroup.leave()
-            })
-            currentUserGroup.wait()
+            self.currentUser = ServerQuery.currentUser()
+            self.navigationItem.title = currentUser?.username
             
             let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(barItemLogOutPressed(_:)))
             self.navigationItem.rightBarButtonItem = logOutButton
         }
         
         // Загружаем публикации пользователя
-        let findPostsGroup = DispatchGroup()
-        findPostsGroup.enter()
-        dataProvider.findPosts(by: currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-            posts in
-            
-            if let posts = posts {
-                let sortedPosts = posts.sorted(by: { firstPost, secondPost in
-                    return firstPost.createdTime > secondPost.createdTime
-                })
-                self.posts = sortedPosts
-                findPostsGroup.leave()
-            } else {
-                self.present(AlertController.getAlert(), animated: true, completion: nil)
-                self.posts = [Post]()
-            }
-        })
-        findPostsGroup.wait()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        if let posts = ServerQuery.userPosts(id: currentUser!.id) {
+            let sortedPosts = posts.sorted(by: { firstPost, secondPost in
+                return firstPost.createdTime > secondPost.createdTime
+            })
+            self.posts = sortedPosts
+        } else {
+            self.present(AlertController.getAlert(), animated: true, completion: nil)
+            self.posts = [Post]()
+        }
 
         // Register cell classes
         collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -86,24 +58,17 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataProvider.findPosts(by: currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-            posts in
-            
-            if let posts = posts {
-                if posts.count > self.posts.count {
-                    let sortedPosts = posts.sorted(by: { firstPost, secondPost in
-                        return firstPost.createdTime > secondPost.createdTime
-                    })
-                    self.posts = sortedPosts
-                    DispatchQueue.main.async {
-                        print("reload")
-                        self.collectionView?.reloadData()
-                    }
-                }
-            } else {
-                print("Posts are not found")
+        if let posts = ServerQuery.userPosts(id: currentUser!.id) {
+            if posts.count > self.posts.count {
+                let sortedPosts = posts.sorted(by: { firstPost, secondPost in
+                    return firstPost.createdTime > secondPost.createdTime
+                })
+                self.posts = sortedPosts
+                self.collectionView?.reloadData()
             }
-        })
+        } else {
+            print("Posts are not found")
+        }
     }
     /*
     // MARK: - Navigation
@@ -131,7 +96,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         let imageView = UIImageView(frame: cell.frame)
-        imageView.image = posts[indexPath.item].image
+        imageView.kf.setImage(with: URL(string: posts[indexPath.item].image))
         cell.backgroundView = imageView
         
         return cell
@@ -147,7 +112,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             fatalError()
         }
 
-        headerView.avatar.image = user.avatar
+        headerView.avatar.kf.setImage(with: URL(string: currentUser!.avatar))
         headerView.fullName.text = user.fullName
         headerView.followers.setTitle("Followers: \(user.followedByCount)", for: .normal)
         headerView.following.setTitle("Following: \(user.followsCount)", for: .normal)
@@ -234,8 +199,8 @@ extension ProfileCollectionViewController {
         headerView.followers.titlePage = "Followers"
         headerView.following.titlePage = "Following"
         
-        headerView.followers.userID = user.id
-        headerView.following.userID = user.id
+        headerView.followers.userID = currentUser!.id
+        headerView.following.userID = currentUser!.id
     }
     
     @objc func followersButtonPressed(_ sender: DataUIButton) {
@@ -263,14 +228,12 @@ extension ProfileCollectionViewController {
         }
         
         if text == "Follow" {
-            userProvider.follow(currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive)) { _ in
-            }
+            ServerQuery.follow(id: currentUser!.id)
             
             sender.setTitle("Unfollow", for: .normal)
             sender.sizeToFit()
         } else {
-            userProvider.unfollow(currentUser!.id, queue: DispatchQueue.global(qos: .userInteractive)) { _ in
-            }
+            ServerQuery.unfollow(id: currentUser!.id)
             
             sender.setTitle("Follow", for: .normal)
             sender.sizeToFit()
@@ -283,46 +246,19 @@ extension ProfileCollectionViewController {
         }
         
         if let destination = segue.destination as? UsersListTableViewController {
-            var users = [User]()
-            
+            var users: [User]?
             destination.title = dataButton.titlePage
             
-            let prepareGroup = DispatchGroup()
-            
-            prepareGroup.enter()
-            
             if dataButton.titlePage!.contains("Following") {
-                userProvider.usersFollowedByUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                    usersFound in
-                    
-                    if usersFound != nil {
-                        for user in usersFound! {
-                            users.append(user)
-                        }
-                    }
-                    
-                    prepareGroup.leave()
-                })
+                users = ServerQuery.following(id: currentUser!.id)
             } else {
-                userProvider.usersFollowingUser(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                    usersFound in
-                    
-                    if usersFound != nil {
-                        for user in usersFound! {
-                            users.append(user)
-                        }
-                    }
-                    
-                    prepareGroup.leave()
-                })
+                users = ServerQuery.followers(id: currentUser!.id)
             }
             
-            prepareGroup.wait()
-            
-            destination.users = [User.Identifier]()
-            
-            for user in users {
-                destination.users?.append(user.id)
+            if let unwrapUsers = users {
+                destination.users = users
+            } else {
+                destination.users = [User]()
             }
         }
     }

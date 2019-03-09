@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DataProvider
+import Kingfisher
 
 class FeedTableViewCell: UITableViewCell {
     
@@ -28,48 +28,48 @@ class FeedTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    // Собирает ячейку FeedTableViewCell в соответствия с данными из публикации
+    /// Собирает ячейку FeedTableViewCell в соответствия с данными из публикации
     func configure(with post: Post) {
-        avatarImage.image = post.authorAvatar
+        avatarImage.kf.setImage(with: URL(string: post.authorAvatar)!)
         author.setTitle(post.authorUsername, for: .normal)
-        photo.image = post.image
+        photo.kf.setImage(with: URL(string: post.image)!)
         descriptionOfPost.text = post.description
         descriptionOfPost.sizeToFit()
         likes.setTitle("Likes: \(post.likedByCount)", for: .normal)
+        
+        let anotherDateFormatter = DateFormatter()
+        anotherDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        anotherDateFormatter.locale = Locale(identifier: "en_US")
+        let dateFromString = anotherDateFormatter.date(from: post.createdTime)
+        print(dateFromString)
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
         dateFormatter.doesRelativeDateFormatting = true
-        let date = dateFormatter.string(from: post.createdTime)
-        
+        let date = dateFormatter.string(from: dateFromString!)
         timeLabel.text = date
-        
-        var usersLikedPost = [User.Identifier]()
-        var currentUserId = User.Identifier(rawValue: "")
-        DataProviders.shared.postsDataProvider.usersLikedPost(with: post.id, queue: DispatchQueue.global(qos: .background), handler: {
-            users in
-            
-            if users != nil {
-                for user in users! {
-                    usersLikedPost.append(user.id)
-                }
-            }
-        })
-        DataProviders.shared.usersDataProvider.currentUser(queue: DispatchQueue.global(qos: .background), handler: {
-            user in
-            currentUserId = user!.id
-        })
-        
-        if usersLikedPost.contains(currentUserId) {
-            likeButton.tintColor = UIView().tintColor
-        } else {
-            likeButton.tintColor = UIColor.lightGray
-        }
         
         // Не нашёл размеров сердца bigLike, на глаз прикинул его размер
         likeButton.frame.size.width = self.frame.width / 4
+        
+        let usersLikedPost = ServerQuery.postLikes(postId: post.id)
+        let currentUser = ServerQuery.currentUser()!
+        
+        guard let usersLikedPostUnwrapped = usersLikedPost else {
+            likeButton.tintColor = UIColor.lightGray
+            return
+        }
+        
+        for user in usersLikedPostUnwrapped {
+            if user == currentUser {
+                likeButton.tintColor = UIView().tintColor
+                return
+            }
+        }
+        
+        likeButton.tintColor = UIColor.lightGray
     }
     
 }

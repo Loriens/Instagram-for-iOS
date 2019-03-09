@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DataProvider
 
 class FeedTableViewController: UITableViewController {
     
@@ -24,16 +23,7 @@ class FeedTableViewController: UITableViewController {
         let feedGroup = DispatchGroup()
         feedGroup.enter()
         // В данном месте целесообразно не ставить индикатор активности, потому что это окно открывается самым первым при открытии приложения
-        DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
-            if newPosts == nil {
-                self.present(AlertController.getAlert(), animated: true, completion: nil)
-                self.posts = [Post]()
-            } else {
-                self.posts = newPosts
-            }
-            feedGroup.leave()
-        })
-        feedGroup.wait()
+        self.posts = ServerQuery.feed()
         
         title = "Feed"
         tableView.estimatedRowHeight = 200.0
@@ -46,15 +36,8 @@ class FeedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DataProviders.shared.postsDataProvider.feed(queue: DispatchQueue.global(qos: .userInteractive), handler: { newPosts in
-            let newCount = newPosts?.count
-            if newCount! > self.posts!.count {
-                DispatchQueue.main.async {
-                    self.posts = newPosts
-                    self.tableView.reloadData()
-                }
-            }
-        })
+        self.posts = ServerQuery.feed()
+        self.tableView.reloadData()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -129,7 +112,7 @@ class FeedTableViewController: UITableViewController {
                 likes.setTitle("Likes: \(countOfLikes)", for: .normal)
                 likes.layoutIfNeeded()
             }
-            DataProviders.shared.postsDataProvider.likePost(with: post, queue: DispatchQueue.global(qos: .background), handler: { _ in })
+            ServerQuery.like(postId: post)
         } else {
             sender.tintColor = UIColor.lightGray
             
@@ -143,7 +126,7 @@ class FeedTableViewController: UITableViewController {
                 likes.setTitle("Likes: \(countOfLikes)", for: .normal)
                 likes.layoutIfNeeded()
             }
-            DataProviders.shared.postsDataProvider.unlikePost(with: post, queue: DispatchQueue.global(qos: .background), handler: { _ in })
+            ServerQuery.unlike(postId: post)
         }
     }
     
@@ -209,37 +192,13 @@ class FeedTableViewController: UITableViewController {
         
         if let destination = segue.destination as? UsersListTableViewController {
             destination.title = dataButton.titlePage
-            
-            DataProviders.shared.postsDataProvider.usersLikedPost(with: dataButton.postID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                users in
-                
-                destination.users = [User.Identifier]()
-                
-                if users == nil {
-                    self.present(AlertController.getAlert(), animated: true, completion: nil)
-                    destination.users? = [User.Identifier]()
-                } else {
-                    for user in users! {
-                        destination.users?.append(user.id)
-                    }
-                }
-                
-                prepareGroup.leave()
-            })
+            destination.users = ServerQuery.postLikes(postId: dataButton.postID!)
+            prepareGroup.leave()
         }
         
         if let destination = segue.destination as? ProfileCollectionViewController {
-            DataProviders.shared.usersDataProvider.user(with: dataButton.userID!, queue: DispatchQueue.global(qos: .userInteractive), handler: {
-                user in
-                
-                if user != nil {
-                    destination.currentUser = user
-                } else {
-                    self.present(AlertController.getAlert(), animated: true, completion: nil)
-                }
-                
-                prepareGroup.leave()
-            })
+            (destination.currentUser, _) = ServerQuery.user(id: dataButton.userID!)
+            prepareGroup.leave()
         }
         
         prepareGroup.wait()
