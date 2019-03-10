@@ -16,10 +16,6 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let view = tabBarController?.view {
-//            indicator = CustomActivityIndicator(view: view)
-//        }
-        
         let feedGroup = DispatchGroup()
         feedGroup.enter()
         // В данном месте целесообразно не ставить индикатор активности, потому что это окно открывается самым первым при открытии приложения

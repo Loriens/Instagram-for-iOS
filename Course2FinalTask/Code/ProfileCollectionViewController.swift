@@ -261,7 +261,7 @@ extension ProfileCollectionViewController {
             }
             
             if let unwrapUsers = users {
-                destination.users = users
+                destination.users = unwrapUsers
             } else {
                 destination.users = [User]()
             }

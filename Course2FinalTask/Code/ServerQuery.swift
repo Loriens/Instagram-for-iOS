@@ -494,7 +494,7 @@ class ServerQuery {
             return users
         }
         
-        guard let url = URL(string: host + "/users/" + id + "/followers") else {
+        guard let url = URL(string: host + "/users/" + id + "/following") else {
             print("url is empty")
             return users
         }
