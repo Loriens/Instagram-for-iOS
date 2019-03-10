@@ -188,10 +188,16 @@ extension ProfileCollectionViewController {
     
     /// Выполняет выход из профиля
     @objc func barItemLogOutPressed(_ sender: Any?) {
+        guard let serverResponse = ServerQuery.signOut() else {
+            print("can't sign out")
+            return
+        }
+        
         if ServerQuery.signOut() == 200 {
             performSegue(withIdentifier: "unwindtoLoginVC", sender: self)
         } else {
-            print("can't sign out")
+            let alert = Alert.getAlert(error: serverResponse)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -240,7 +246,14 @@ extension ProfileCollectionViewController {
         let followersCount = Int(arrayOfFollowers.last!)!
 
         if text == "Follow" {
-            ServerQuery.follow(id: currentUser!.id)
+            let (success, serverResponse) = ServerQuery.follow(id: currentUser!.id)
+            print(success)
+            print(serverResponse)
+            if !success {
+                let alert = Alert.getAlert(error: serverResponse!)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
             
             UIView.performWithoutAnimation {
                 header.followers.setTitle("Followers: \(followersCount + 1)", for: .normal)
@@ -250,7 +263,13 @@ extension ProfileCollectionViewController {
             sender.setTitle("Unfollow", for: .normal)
             sender.sizeToFit()
         } else {
-            ServerQuery.unfollow(id: currentUser!.id)
+            let (success, serverResponse) = ServerQuery.unfollow(id: currentUser!.id)
+            
+            if !success {
+                let alert = Alert.getAlert(error: serverResponse!)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
             
             UIView.performWithoutAnimation {
                 header.followers.setTitle("Followers: \(followersCount - 1)", for: .normal)

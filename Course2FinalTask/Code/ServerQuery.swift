@@ -351,13 +351,10 @@ class ServerQuery {
                     taskGroup.leave()
                     return
                 }
-                
-                
-                taskGroup.leave()
-
             }
             
             success = true
+            taskGroup.leave()
         }
         dataTask.resume()
         taskGroup.wait()
@@ -412,13 +409,10 @@ class ServerQuery {
                     taskGroup.leave()
                     return
                 }
-                
-                
-                taskGroup.leave()
-                
             }
             
             success = true
+            taskGroup.leave()
         }
         dataTask.resume()
         taskGroup.wait()
