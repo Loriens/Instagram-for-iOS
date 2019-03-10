@@ -39,7 +39,6 @@ class FeedTableViewController: UITableViewController {
         let newPosts = ServerQuery.feed()
         if newPosts.count > self.posts!.count {
             self.posts = newPosts
-            print("reload data")
             self.tableView.reloadData()
         }
     }
