@@ -26,8 +26,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     /// Функция вызывается после выхода из профиля
     @IBAction func unwindToLoginVC(segue: UIStoryboardSegue) {
-        // do something
-        
+        loginField.text = ""
+        passwordField.text = ""
     }
 
     @IBAction func signInPressed(_ sender: Any) {
