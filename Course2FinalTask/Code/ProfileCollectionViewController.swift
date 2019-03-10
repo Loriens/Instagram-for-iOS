@@ -193,7 +193,7 @@ extension ProfileCollectionViewController {
             return
         }
         
-        if ServerQuery.signOut() == 200 {
+        if serverResponse == 200 {
             performSegue(withIdentifier: "unwindtoLoginVC", sender: self)
         } else {
             let alert = Alert.getAlert(error: serverResponse)

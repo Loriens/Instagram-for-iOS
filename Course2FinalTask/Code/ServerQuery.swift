@@ -126,9 +126,10 @@ class ServerQuery {
                 if httpResponse.statusCode != 200 {
                     print("error, HTTP status code: \(httpResponse.statusCode)")
                     taskGroup.leave()
-                    self.token = nil
                     return
                 }
+                
+                self.token = nil
                 taskGroup.leave()
             }
         }
