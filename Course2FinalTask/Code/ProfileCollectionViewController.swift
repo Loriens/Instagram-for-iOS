@@ -44,7 +44,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             })
             self.posts = sortedPosts
         } else {
-            self.present(AlertController.getAlert(), animated: true, completion: nil)
+//            self.present(AlertController.getAlert(), animated: true, completion: nil)
             self.posts = [Post]()
         }
 

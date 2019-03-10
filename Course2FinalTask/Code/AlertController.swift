@@ -8,10 +8,27 @@
 
 import UIKit
 
-class AlertController {
+class Alert {
     
-    static func getAlert(handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
-        let alert = UIAlertController(title: "Unknown error", message: "Please, try again later.", preferredStyle: .alert)
+    static func getAlert(error: Int, handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
+        var message: String
+        
+        switch error {
+        case 404:
+            message = "Not found"
+        case 400:
+            message = "Bad request"
+        case 401:
+            message = "Unathorized"
+        case 406:
+            message = "Not acceptable"
+        case 422:
+            message = "Unprocessable"
+        default:
+            message = "Transfer error"
+        }
+        
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: handler))
         return alert
     }

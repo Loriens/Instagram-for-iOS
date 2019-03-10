@@ -424,7 +424,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="send" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-3z-XXp">
+                            <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-3z-XXp">
                                 <rect key="frame" x="16" y="238" width="288" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -453,6 +453,7 @@
                         <viewLayoutGuide key="safeArea" id="A2o-7K-Olh"/>
                     </view>
                     <connections>
+                        <outlet property="buttonSignIn" destination="s9a-3z-XXp" id="HYk-XD-q5X"/>
                         <outlet property="loginField" destination="odF-0P-Obb" id="9yt-yw-JWI"/>
                         <outlet property="passwordField" destination="6HE-QD-Wki" id="bp3-CK-7II"/>
                         <segue destination="gsB-f6-qQj" kind="show" identifier="showLogIn" id="Qap-sa-hBg"/>

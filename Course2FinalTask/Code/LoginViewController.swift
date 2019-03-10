@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var buttonSignIn: UIButton!
     
     private let defaultLogin: String = "user"
     private let defaultPassword: String = "qwerty"
@@ -30,18 +31,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func signInPressed(_ sender: Any) {
-        let (token, _) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)
+        let (token, serverResponse) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)
         
         guard token != nil else {
-            print("token is empty")
+            let alert = Alert.getAlert(error: serverResponse!)
+            self.present(alert, animated: true, completion: nil)
             return
         }
         
         performSegue(withIdentifier: "showLogIn", sender: self)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if loginField.text != "" && passwordField.text != "" {
+            buttonSignIn.isEnabled = true
+            buttonSignIn.alpha = 1
+        } else {
+            buttonSignIn.alpha = 0.3
+            buttonSignIn.isEnabled = false
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        signInPressed(self)
+        if loginField.text != "" && passwordField.text != "" {
+            signInPressed(self)
+        } else {
+            print("enter login and password")
+        }
+        
         return true
     }
     
