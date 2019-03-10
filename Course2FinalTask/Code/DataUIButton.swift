@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DataProvider
 
 // Добавление полей с данными в UIButton
 @objc class DataUIButton: UIButton {
