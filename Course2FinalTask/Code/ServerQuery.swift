@@ -17,7 +17,7 @@ class ServerQuery {
     
     /// Server's URL
     private static let host = "http://localhost:8080"
-    private static var token: String? = nil
+    private static var token: String?
     /// httpResponse.statusCode from server
     private static var serverResponse: Int? = nil
     
@@ -58,7 +58,6 @@ class ServerQuery {
                 self.serverResponse = httpResponse.statusCode
                 
                 if httpResponse.statusCode != 200 {
-                    print("error, HTTP status code: \(httpResponse.statusCode)")
                     taskGroup.leave()
                     return
                 }
@@ -127,11 +126,10 @@ class ServerQuery {
                 if httpResponse.statusCode != 200 {
                     print("error, HTTP status code: \(httpResponse.statusCode)")
                     taskGroup.leave()
-                    return
-                } else {
                     self.token = nil
-                    taskGroup.leave()
+                    return
                 }
+                taskGroup.leave()
             }
         }
         dataTask.resume()
