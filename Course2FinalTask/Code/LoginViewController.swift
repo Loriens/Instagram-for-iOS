@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func signInPressed(_ sender: Any) {
         let (token, serverResponse) = ServerQuery.signIn(login: loginField.text!, password: passwordField.text!)
-        print(token)
+        
         guard token != nil else {
             let alert = Alert.getAlert(error: serverResponse!)
             self.present(alert, animated: true, completion: nil)
