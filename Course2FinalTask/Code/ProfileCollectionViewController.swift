@@ -60,8 +60,13 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         
         if let posts = ServerQuery.userPosts(id: currentUser!.id) {
             if posts.count > self.posts.count {
+                /// Преобразует строку в тип Date
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                dateFormatter.locale = Locale(identifier: "en_US")
+                
                 let sortedPosts = posts.sorted(by: { firstPost, secondPost in
-                    return firstPost.createdTime > secondPost.createdTime
+                    return dateFormatter.date(from: firstPost.createdTime)! > dateFormatter.date(from: secondPost.createdTime)!
                 })
                 self.posts = sortedPosts
                 self.collectionView?.reloadData()

@@ -36,8 +36,12 @@ class FeedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.posts = ServerQuery.feed()
-        self.tableView.reloadData()
+        let newPosts = ServerQuery.feed()
+        if newPosts.count > self.posts!.count {
+            self.posts = newPosts
+            print("reload data")
+            self.tableView.reloadData()
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

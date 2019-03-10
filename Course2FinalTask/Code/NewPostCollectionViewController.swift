@@ -13,15 +13,10 @@ private let reuseIdentifier = "PhotoCell"
 
 class NewPostCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITabBarControllerDelegate {
     
-    let photoProvider = DataProviders.shared.photoProvider
-    var photos: [UIImage]?
-    var previewPhotoForSegue: [UIImage]?
+    private var photosCount = 7
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        photos = photoProvider.photos()
-        previewPhotoForSegue = photoProvider.thumbnailPhotos()
 
         // Register cell classes
         collectionView!.register(NewPostCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -49,25 +44,19 @@ class NewPostCollectionViewController: UICollectionViewController, UICollectionV
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        guard let photos = photos else {
-            return 0
-        }
-        
-        return photos.count
+        return photosCount
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! NewPostCollectionViewCell
     
         let imageView = UIImageView(frame: cell.frame)
-        if let photo = photos?[indexPath.item] {
-            imageView.image = photo
-            cell.backgroundView = imageView
-            cell.item = indexPath.item
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(tappedImage(_:)))
-            cell.addGestureRecognizer(tap)
-        }
+        imageView.image = UIImage(named: "new" + String(indexPath.item + 1))
+        cell.backgroundView = imageView
+        cell.item = indexPath.item + 1
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedImage(_:)))
+        cell.addGestureRecognizer(tap)
     
         return cell
     }
@@ -104,11 +93,7 @@ extension NewPostCollectionViewController {
         
         if let destination = segue.destination as? FilterViewController {
             if let cell = sender as? NewPostCollectionViewCell {
-                destination.previewImage = previewPhotoForSegue?[cell.item!]
-                
-                if let imageView = cell.backgroundView as? UIImageView {
-                    destination.tempImage = imageView.image
-                }
+                destination.tempImage = "new" + String(cell.item!)
             }
         }
     }

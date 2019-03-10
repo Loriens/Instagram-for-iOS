@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DataProvider
 
 class DescriptionPostViewController: UIViewController {
     
@@ -34,21 +33,14 @@ extension DescriptionPostViewController {
     
     @objc func barItemSharePressed(_ sender: Any?) {
         Spinner.start()
-        let shareGroup = DispatchGroup()
+        if descriptionField.text == nil {
+            descriptionField.text = ""
+        }
         
-        shareGroup.enter()
+        let imageData = UIImagePNGRepresentation(tempImage!)!
         
-        DataProviders.shared.postsDataProvider.newPost(with: imageView.image!, description: descriptionField.text ?? "", queue: DispatchQueue.global(qos: .userInitiated), handler: {(post) in
-            if post != nil {
-                shareGroup.leave()
-            } else {
-                self.present(AlertController.getAlert(), animated: true, completion: nil)
-                shareGroup.leave()
-            }
-        })
         
-        shareGroup.wait()
-        
+        ServerQuery.post(image: imageData.base64EncodedString(), description: descriptionField.text!)
         performSegue(withIdentifier: "unwindToNewPostVC", sender: self)
     }
     

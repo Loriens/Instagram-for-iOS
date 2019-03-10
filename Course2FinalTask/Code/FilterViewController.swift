@@ -12,8 +12,7 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
-    var tempImage: UIImage?
-    var previewImage: UIImage?
+    var tempImage: String?
 //    var indicator: CustomActivityIndicator?
     private let filterNames = ["CIColorInvert", "CISepiaTone", "CICrystallize", "CIMotionBlur", "CIVibrance"]
     private let filter = ImageFilter()
@@ -27,7 +26,7 @@ class FilterViewController: UIViewController {
 //        }
         
         if let image = tempImage {
-            mainImage.image = image
+            mainImage.image = UIImage(named: tempImage!)
         }
         
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(barItemNextPressed(_:)))
@@ -76,7 +75,7 @@ extension FilterViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.filterName.text = filterNames[indexPath.item]
         
         DispatchQueue.global(qos: .userInteractive).async {
-            if let ciimage = CIImage(image: self.previewImage!) {
+            if let ciimage = CIImage(image: UIImage(named: self.tempImage!)!) {
                 let resultImage = self.filter.applyFilter(name: self.filterNames[indexPath.item], params: [kCIInputImageKey: ciimage])
                 DispatchQueue.main.async {
                     cell.previewImage.image = resultImage
@@ -117,6 +116,12 @@ extension FilterViewController {
             return
         }
         
+        if let image = view.previewImage.image {
+            self.mainImage.image = image
+            Spinner.stop()
+            return
+        }
+        
         let filterGroup = DispatchGroup()
         
         filterGroup.enter()
@@ -124,7 +129,7 @@ extension FilterViewController {
         var resultImage: UIImage?
         
         DispatchQueue.global(qos: .userInteractive).async {
-            if let ciimage = CIImage(image: self.tempImage!) {
+            if let ciimage = CIImage(image: UIImage(named: self.tempImage!)!) {
                 resultImage = self.filter.applyFilter(name: nameFilter, params: [kCIInputImageKey: ciimage])
                 filterGroup.leave()
                 

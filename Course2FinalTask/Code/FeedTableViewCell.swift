@@ -41,7 +41,6 @@ class FeedTableViewCell: UITableViewCell {
         anotherDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         anotherDateFormatter.locale = Locale(identifier: "en_US")
         let dateFromString = anotherDateFormatter.date(from: post.createdTime)
-        print(dateFromString)
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
