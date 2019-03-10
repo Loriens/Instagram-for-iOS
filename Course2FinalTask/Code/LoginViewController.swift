@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -18,6 +18,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginField.delegate = self
+        passwordField.delegate = self
     }
     
     /// Функция вызывается после выхода из профиля
@@ -35,6 +38,11 @@ class LoginViewController: UIViewController {
         }
         
         performSegue(withIdentifier: "showLogIn", sender: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        signInPressed(self)
+        return true
     }
     
 }
