@@ -227,19 +227,36 @@ extension ProfileCollectionViewController {
     }
     
     @objc func followButtonPressed(_ sender: UIButton) {
-        guard let text = sender.titleLabel?.text else {
-            print("Text is not found")
+        guard let text = sender.titleLabel?.text,
+            let header = self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProfileHeaderCollectionReusableView else {
+            print("Text or header are not found")
             return
         }
-        
+
+        guard let arrayOfFollowers = header.followers.title(for: .normal)?.components(separatedBy: CharacterSet.decimalDigits.inverted) else {
+            return
+        }
+
+        let followersCount = Int(arrayOfFollowers.last!)!
+
         if text == "Follow" {
             ServerQuery.follow(id: currentUser!.id)
             
+            UIView.performWithoutAnimation {
+                header.followers.setTitle("Followers: \(followersCount + 1)", for: .normal)
+                header.followers.layoutIfNeeded()
+            }
+
             sender.setTitle("Unfollow", for: .normal)
             sender.sizeToFit()
         } else {
             ServerQuery.unfollow(id: currentUser!.id)
             
+            UIView.performWithoutAnimation {
+                header.followers.setTitle("Followers: \(followersCount - 1)", for: .normal)
+                header.followers.layoutIfNeeded()
+            }
+
             sender.setTitle("Follow", for: .normal)
             sender.sizeToFit()
         }
