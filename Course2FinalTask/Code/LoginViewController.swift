@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func signInPressed(_ sender: Any) {
-        let (token, serverResponse) = ServerQuery.signIn(login: defaultLogin, password: defaultPassword)
+        let (token, serverResponse) = ServerQuery.signIn(login: loginField.text!, password: passwordField.text!)
         
         guard token != nil else {
             let alert = Alert.getAlert(error: serverResponse!)
