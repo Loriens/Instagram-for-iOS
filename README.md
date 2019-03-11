@@ -6,5 +6,5 @@ Command `./Run` runs server in Terminal.
 Server provides information about posts, users and creates posts.
 
 # Main User
-login: user . 
+login: user  
 password: qwerty
