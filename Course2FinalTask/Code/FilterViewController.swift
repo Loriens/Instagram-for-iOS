@@ -24,7 +24,6 @@ class FilterViewController: UIViewController {
 //        if let view = self.tabBarController?.view {
 //            indicator = CustomActivityIndicator(view: view)
 //        }
-        // commit test
         
         if let image = tempImage {
             mainImage.image = UIImage(named: tempImage!)
