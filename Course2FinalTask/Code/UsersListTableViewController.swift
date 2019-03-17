@@ -41,7 +41,11 @@ class UsersListTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "UserCell")!
         
         cell.textLabel?.text = users![indexPath.item].username
-        cell.imageView?.kf.setImage(with: URL(string: users![indexPath.item].avatar))
+        if let url = URL(string: users![indexPath.item].avatar) {
+            cell.imageView?.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, URL) in
+                cell.setNeedsLayout()
+            })
+        }
         
         return cell
     }
