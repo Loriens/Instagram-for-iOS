@@ -14,6 +14,8 @@ class Alert {
         var message: String
         
         switch error {
+        case 0:
+            message = "Server is not working"
         case 404:
             message = "Not found"
         case 400:

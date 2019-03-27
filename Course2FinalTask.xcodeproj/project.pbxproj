@@ -95,6 +95,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04F3311A224BA0DB00487013 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				86C97F452232A24400D99DD5 /* ServerQuery.swift */,
+				86C97F3F2232724900D99DD5 /* Account.swift */,
+				865F6D212233189100BED779 /* User.swift */,
+				865F6D232233193C00BED779 /* Post.swift */,
+				8687E59421B938D400A403AB /* DataUIButton.swift */,
+				86E512C3223172A100E0BCDC /* Spinner.swift */,
+				867B0CA8221ED79E001C5E9B /* CustomActivityIndicator.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		04F3311E224BA11100487013 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */,
+				86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */,
+				86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */,
+				86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */,
+				86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */,
+				86228D27222569A1004E9D2C /* ImageFilter.swift */,
+				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
+				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04F3311F224BA11800487013 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				86B3EFA422318D00009BDE6D /* AlertController.swift */,
+				866D0C8B22271C6B00612E33 /* DescriptionPostViewController.swift */,
+				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
+				8674BE7C2224658B009DFD4E /* FilterViewController.swift */,
+				86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */,
+				86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */,
+				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
+				8687E59221B8243E00A403AB /* UsersListTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		74B7924B202B3254006BCB41 = {
 			isa = PBXGroup;
 			children = (
@@ -127,30 +171,10 @@
 			children = (
 				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				86F911B221B5B0BF004E38D0 /* Main.storyboard */,
-				8674BE7C2224658B009DFD4E /* FilterViewController.swift */,
-				86F0ADAC2225232A0048A929 /* FilterCollectionViewCell.swift */,
-				86F0ADAD2225232A0048A929 /* FilterCollectionViewCell.xib */,
-				86228D27222569A1004E9D2C /* ImageFilter.swift */,
-				86CF406621B6AB28007C0FAE /* FeedTableViewController.swift */,
-				86B3EFA422318D00009BDE6D /* AlertController.swift */,
-				86CF406821B6BC67007C0FAE /* FeedTableViewCell.swift */,
-				86CF406921B6BC67007C0FAE /* FeedTableViewCell.xib */,
-				86C97F3D22326AFA00D99DD5 /* LoginViewController.swift */,
-				866D0C8B22271C6B00612E33 /* DescriptionPostViewController.swift */,
-				8687E59921B95C0300A403AB /* ProfileCollectionViewController.swift */,
-				86CF6B452222C3580035084C /* NewPostCollectionViewController.swift */,
-				86B84985222581070050E8CA /* NewPostCollectionViewCell.swift */,
-				867B0CA8221ED79E001C5E9B /* CustomActivityIndicator.swift */,
-				86E512C3223172A100E0BCDC /* Spinner.swift */,
-				86FF617021BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.swift */,
-				86FF617121BE7AD300BA0ED0 /* ProfileHeaderCollectionReusableView.xib */,
-				8687E59221B8243E00A403AB /* UsersListTableViewController.swift */,
-				8687E59421B938D400A403AB /* DataUIButton.swift */,
+				04F3311A224BA0DB00487013 /* Models */,
+				04F3311E224BA11100487013 /* Views */,
+				04F3311F224BA11800487013 /* Controllers */,
 				86CF406421B6AA0D007C0FAE /* LaunchScreen.storyboard */,
-				86C97F452232A24400D99DD5 /* ServerQuery.swift */,
-				86C97F3F2232724900D99DD5 /* Account.swift */,
-				865F6D212233189100BED779 /* User.swift */,
-				865F6D232233193C00BED779 /* Post.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";

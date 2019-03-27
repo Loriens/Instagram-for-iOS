@@ -34,7 +34,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let (token, serverResponse) = ServerQuery.signIn(login: loginField.text!, password: passwordField.text!)
         
         guard token != nil else {
-            let alert = Alert.getAlert(error: serverResponse!)
+            var alert: UIAlertController
+            if let response = serverResponse {
+                alert = Alert.getAlert(error: response)
+            } else {
+                alert = Alert.getAlert(error: 0)
+            }
             self.present(alert, animated: true, completion: nil)
             return
         }
