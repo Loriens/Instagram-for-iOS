@@ -1,5 +1,5 @@
 # Instagram-for-iOS
-The application is a testing of my Swift skills
+The application shows my Swift skills
 
 # Run server
 Command `./Run` runs server in Terminal.   
